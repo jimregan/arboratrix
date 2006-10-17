@@ -1,0 +1,1748 @@
+2003-09-04  Antonio-Miguel Corbi Bellot  <acorbi@hal9000>
+
+	* configure.ac: CXX=g++...libtool-1.5 requiere este nombre para el
+	compilador en lugar de g++-3.x, si no implica usar la opcion
+	'--tag CXX' como se puede ver comentada en los Makefile.am.
+
+2003-09-01  Antonio-M. Corbi Bellot  <acorbi@peurl.dlsi.ua.es>
+
+	* configure.ac: v2.0.0-pre18, pocos cambios...
+
+2003-07-26  Antonio-M. Corbi Bellot  <acorbi@hal9000>
+
+	* src/tagger/tagger_view.cc (create_gui): Uso de marcado 'html'
+	para enfatizar determinados elementos del interfaz (gtk2 lo
+	permite).
+
+2003-07-24  Antonio-Miguel Corbi Bellot  <acorbi@hal9000>
+
+	* configure.ac: v2.0.0-pre17, ya queda menos para tener 'trazas'.
+
+	* src/tagger/text_item.cc (draw_lines_to_children): Incluye la
+	infraestructura para dibujar el arco de una traza si el nodo la
+	tiene. Aun no pinta el arco, sino una linea. Las trazas aun no se
+	guardan/recuperan del archivo 'xml'.
+
+	* src/tagger/canvas.cc (button_release): Corregido el error que
+	hacia q al crear una traza no se respetara el valor de la
+	coordenada 'x' original.
+	(set_line_mode_on): Permite cambiar el estilo de las lineas a
+	trazo continuo.
+	(set_line_mode_on_off): Permite cambiar el estilo de las lineas a
+	trazo discontinuo.
+
+	* src/tagger/text_model.h (Model): Corregido el error q duplicaba
+	el metodo 'set_reference' en lugar de llamarlo 'get_reference'.
+
+2003-07-22  Antonio-Miguel Corbi Bellot  <acorbi@hal9000>
+
+	* configure.ac: v2.0.0-pre16, contiene la infraestructura basica
+	para crear trazas.
+
+	* src/tagger/tag_item.cc (show_feedback_for): Comprueba si se
+	quiere crear una traza y avisa de ello si es posible.
+
+	* src/tagger/canvas.cc (button_release): Añadidos los chequeos
+	necesarios para soportar la creacion de trazas.
+
+2003-07-21  Antonio-Miguel Corbi Bellot  <acorbi@hal9000>
+
+	* src/tagger/canvas.cc (show_feedback): Y las variantes
+	'show_feedback_for' de Text_item y Tag_item reciben un parametro
+	extra con el q pueden saber si el usuario pulsa la tecla
+	'control'.
+
+	* src/tagger/utils.cc (Utils): Añadida la clase 'recolectora' de
+	utiles. Inicialmente 'adopta' el conversor de enteros a cadenas q
+	antes estaba en Text_model.
+
+2003-07-17  Antonio-Miguel Corbi Bellot  <acorbi@hal9000>
+
+	* configure.ac: v2.0.0-pre15, soporta la lectura/escritura de los
+	archivos en UTF-8.
+
+	* src/tagger/tag_model.cc (to_xml): No llama a 'g_locale_to_utf8'
+	de forma innecesaria.
+
+	* src/tagger/text_model.cc (to_xml): No llama a 'g_locale_to_utf8'
+	de forma innecesaria.
+
+	* src/tagger/sentence.cc (to_xml): No llama a 'g_locale_to_utf8'
+	de forma innecesaria.
+
+2003-07-15  Antonio-Miguel Corbi Bellot  <acorbi@hal9000>
+
+	* configure.ac: v2.0.0-pre14.
+
+	* src/Makefile.am (#EXTRA_DIST): Dejo de guardar el directorio
+	procedente de arboratrix-v1.0, ya he chupado de el todo lo que
+	podia.
+
+	* src/tagger/tag_model.cc (to_qtree): Tiene en cuenta la
+	existencia de indice y la representa como necesita LaTeX.
+
+	* src/tagger/text_model.cc (to_qtree): Tiene en cuenta la
+	existencia de indice y la representa como necesita LaTeX. Tambien
+	tiene en cuenta el q se trate de una categoria nula y muestra en
+	la salida '\phi'.
+
+	* src/tagger/tagger_model.cc (from_xml_to_sentences): Ya lee
+	ficheros XML con 'indices'.
+
+	* configure.ac: v2.0.0-pre13, comienzo a añadir la
+	grbacion/lectura de indices/categorias_nulas en ficheros XML.
+
+	* src/tagger/tagger_view.cc (cm_enable_items): Corregido el error
+	q permitia hacer 'unparent' de 'categorias nulas'.
+	(cm_enable_items): Habilita/deshabilita la posibilidad de crear
+	categorias nulas solo en los nodos q tiene sentido.
+
+2003-07-14  Antonio-Miguel Corbi Bellot  <acorbi@hal9000>
+
+	* src/tagger/text_item.cc (draw): He separado conceptualmente la
+	'actualizacion' de los items del canvas: 'update' significa q el
+	modelo ha cambiado y la vista debe actualizarse, mientras que
+	'draw' significa que sin haber cambiado el modelo, por algun
+	motivo debe actualizarse de nuevo la vista.
+
+	* configure.ac: v2.0.0-pre12, ahora comienzo con los indices.
+
+	* src/tagger/tagger_view.cc (ensure_file_extension): Los ficheros
+	siempre llevan extension '.xml', aunque el usuario no la ponga. Si
+	tiene una extension 'incorrecta', simplemente le añade '.xml',
+	pero no borra la otra.
+
+2003-07-11  Antonio-M. Corbi Bellot  <acorbi@peurl.dlsi.ua.es>
+
+	* configure.ac: v2.0.0-pre11.
+
+	* src/tagger/tagger_model.cc (add_sentence): LLama a
+	'is_valid_string' antes de insertar la cadena, de esta manera
+	descartamos frases vacias, con solo caracteres separadores, de
+	control, etc...
+
+	* src/tagger/text_item.cc (update): No llama a
+	'create_rendered_text' cada vez, asi optimiza algo el redibujado
+	en el canvas.
+
+2003-07-10  Antonio-Miguel Corbi Bellot  <acorbi@hal9000>
+
+	* configure.ac: v2.0.0-pre10. Soporta 'categorias nulas' pero
+	tengo problemas para guardar/leer los ficheros q las tienen.
+
+	* src/tagger/text_item.h (class Text_item): "is_erasable" tiene en
+	cuenta si es una categoria nula.
+
+	* src/tagger/tag_item.cc (show_feedback_for): Cambiados los
+	mensajes de 'feedback'.
+
+	* src/tagger/text_item.cc (Text_item): Tamaño de la letra un poco
+	mayor y en negrita.
+	(show_feedback_for): Cambiado el mensaje de 'feedback'.
+
+2003-07-08  Antonio-Miguel Corbi Bellot  <acorbi@hal9000>
+
+	* configure.ac: v2.0.0-pre9.
+
+	* src/tagger/canvas.cc (Canvas): Corregido el error de liberacion
+	de memoria no reservada (efence) de 'pl' y 'pfd' en
+	'create_font_data'.
+
+	* src/tagger/tag_item.cc (show_feedback_for): Ahora puede saber si
+	cuando se arrastra un item se pulsa 'shift' y a la hora de mostrar
+	el feedback nos indica si se puede crear un 'adjunto'.
+
+	* src/tagger/canvas.cc (button_release): Reordena el arbol
+	automaticamente si al soltar el boton izquierdo del raton detecta
+	q solo se ha movido una 'hoja'.
+
+	* src/tagger/tagger_view.cc (deadjoint_node_option): Ya podemos
+	desadjuntar.
+
+	* src/tagger/sentence.cc (create_adjoint): Respeta las coordenadas
+	'x' actuales y no reordena nodos en pantalla al crear un adjunto.
+
+2003-07-03  Antonio-Miguel Corbi Bellot  <acorbi@hal9000>
+
+	* configure.ac: v2.0.0-pre8, mantiene posiciones relativas entre
+	los items del canvas al 'reparentizar'.
+
+	* src/tagger/canvas.cc (right_button_press): Ahora llama a
+	'save_x_coord' antes de comenzar un arrastre y a 'restore_x_coord'
+	cuando este acaba, de esta manera puedo mantener el orden relativo
+	entre las palabras de la frase tal y como queria Mikel (o casi :).
+
+	* configure.ac: v2.0.0-pre7, 'feedback' para el usuario, este
+	aparece en la 'barra de estado de la aplicacion'.
+
+	* src/tagger/canvas.cc (show_feedback): Es la encargada de
+	desencadenar la accion de 'feedback' al usuario.
+
+	* src/tagger/text_item.cc (show_feedback_for): Permite mostrar al
+	usuario informacion durante el arrastre de un nodo, para asi saber
+	si lo puede dejar 'caer' sobre el actual q hay debajo, etc...
+	
+2003-07-01  Antonio-Miguel Corbi Bellot  <acorbi@hal9000>
+
+	* configure.ac: v2.0.0-pre6.
+
+	* TODO: Añadido el fichero TODO para reflejar lo q queda por hacer.
+
+	* src/gui/progress_dialog.cc (Progress_dialog): Permite crear un
+	dialogo con una barra de progreso, de momento, solo en modo
+	'pulso'. La empleo en la importacion de frases.
+
+2003-06-30  Antonio-Miguel Corbi Bellot  <acorbi@hal9000>
+
+	* configure.ac: v2.0.0-pre5, eliminados los 'warnings' debidos a
+	la existencia de variables no usadas.
+
+2003-06-26  Antonio-Miguel Corbi Bellot  <acorbi@hal9000>
+
+	* configure.ac: v2.0.0-pre4, incluye lo anterior.
+
+	* src/tagger/list_manager.cc (add_element): Corregido el error de
+	no llamar a g_locale_to_utf8 antes de llamar a gtk_list_store_set.
+
+	* src/tagger/text_item.cc (create_rendered_text): Corregido el
+	error de no llamar a g_locale_to_utf8 antes de llamar a
+	gtk_widget_create_pango_layout.
+
+	* src/tagger/sentence_list.cc (finish_callback): Llama a
+	Canvas::deselect_all_items() de manera q si habia alguno
+	seleccionado, lo deselecciona primero. Esto hace q al usuario le
+	quede mas claro q no puede modificar esta frase.
+
+	* configure.ac: Eliminado '--enable-g3' ya q no podemos compilar
+	mas con g++-2.95.x. Necesitamos un compilador >= g++-3.0. Primero
+	busca g++3.3, si no esta prueba con g++-3.2 y si no, llama
+	directamente a g++.
+
+2003-06-23  Antonio-M. Corbi Bellot  <acorbi@hal9000>
+
+	* configure.ac: v2.0.0-pre3, corrige? el fallo anterior y evita la
+	posibilidad de modifcar una frase cuando esta esta marcada como
+	finalizada. Es la version de prueba de Mikel.
+
+	* src/tagger/canvas.cc (left_button_press): Avisa cuando una frase
+	ha sido marcada como finalizada y no deja que se pueda seguir
+	modificando.
+
+2003-06-19  Antonio-Miguel Corbi Bellot  <acorbi@hal9000>
+
+	* configure.ac: v2.0.0-pre2, aun tiene el fallo por el q una frase
+	borrada de la vista sigue en el modelo.
+
+	* src/tagger/canvas.cc (compute_selected_items): Corregido el
+	error q hacia 'unparent' con los items seleccionados de forma
+	recursiva. He añadido un parametro booleano q controla este
+	comportamiento.
+
+	* src/tagger/sentence.h (class Sentence): Su destructor es virtual.
+
+	* configure.ac: v2.0.0-pre1, version para q Mikel la pruebe.
+
+	* src/tagger/canvas.cc (compute_selected_items): Genera la lista
+	de items seleccionados teniendo en cuenta 1) hijos no
+	seleccionados de padres seleccionados y 2) no duplicar por este
+	motivo los items en la lista. De este modo al mover un padre, los
+	hijos se mueven con el por el canvas.
+
+	* src/tagger/tag_list.cc (dnd_data_received_cb): Avisa al usuario
+	de q no existe ningun tag para añadir aun.
+
+	* src/tagger/canvas.cc (move_selected_items): No llama cada a vez
+	a compute_selected_items, sino q asume q esta ha sido llamada antes.
+
+2003-06-18  Antonio-Miguel Corbi Bellot  <acorbi@hal9000>
+
+	* configure.ac: v1.99.41, '...esto sacaba'.
+
+	* src/tagger/tagger_view.cc (untriangle_node_option): Ya convierte
+	triangulos en 'padres-no-triangulos'.
+
+	* src/tagger/list_manager.cc (enter_key_pressed): Las listas de
+	frases y tags capturan la tecla enter en el campo de entrada de
+	texto.
+
+2003-06-17  Antonio-Miguel Corbi Bellot  <acorbi@hal9000>
+
+	* src/tagger/canvas.cc (button_release): Los triangulos solo
+	admiten 'hojas' como hijos.
+
+	* src/tagger/tagger_model.cc (exists_tag): Nueva implementacion
+	haciendo uso de 'find'.
+
+2003-06-16  Antonio-Miguel Corbi Bellot  <acorbi@hal9000>
+
+	* configure.ac: v1.99.40, 'exporta-importa-tags' version...
+
+	* src/tagger/tagger_model.cc (import_tags): Junto con el metodo
+	correspondiente de la vista ya se pueden importar tags desde
+	ficheros ascii.
+	(export_tags): Junto con el metodo correspondiente de la vista ya
+	se pueden exportar tags a ficheros ascii.
+
+2003-06-15  Antonio-M. Corbi Bellot  <acorbi@peurl.dlsi.ua.es>
+
+	* configure.ac: v1.99.39, guarda-como + importa-frases.
+
+2003-06-14  Antonio-M. Corbi Bellot  <acorbi@peurl.dlsi.ua.es>
+
+	* src/tagger/sentence.cc (add_text_item): Corregido el fallo q
+	hacia q se mostrase en el canvas cada text item recien creado. 
+
+	* src/tagger/tagger_view.cc (save_as_option): Implementada.
+	(import_sentences_option): Implementada.
+
+2003-06-12  Antonio-Miguel Corbi Bellot  <acorbi@hal9000>
+
+	* configure.ac: v1.99.38, ya hay qtree.
+
+	* src/tagger/tagger_model.cc (save_document_qtree): Guarda
+	documentos en formato qtree, no comprueba anidamiento de
+	triangulos q este no admite.
+
+2003-06-10  Antonio-Miguel Corbi Bellot  <acorbi@hal9000>
+
+	* configure.ac: v1.99.37, 'toma triangulitos --- nene'.
+
+	* src/tagger/sentence.cc (layout_tree_in_screen): Incluye una
+	pequeña modificacion para q los tag_items (pueden tener hijos) q
+	no tienen, no se 'pinten' abajo del todo.
+
+	* src/tagger/tag_item.h (class Tag_item): Los trinagulos se
+	implementan como un caso especial de un Tag_item, al arrastrar una
+	'etiqueta' al canvas, antes de soltar el boton del raton, se pulsa
+	'CONTROL' y el tag_item se crea siendo 'consciente' de q es un
+	triangulo. La idea es q mas adelante se pueda 'reconvertir' en un
+	tag_item 'normal y corriente'.
+
+	* src/tagger/tag_item.cc (draw_lines_to_children): Ya se dibujan
+	los triangulos.
+
+	* src/tagger/sentence_list.cc (Sentence_list): Corregido error
+	menor que hacia q el interfaz de las listas de frases y tags no
+	estuviera 'actualizado' al modelo nada mas iniciar la aplicacion.
+
+2003-06-09  Antonio-M. Corbi Bellot  <acorbi@hal9000>
+
+	* configure.ac: v1.99.36, 'en busca de los triangulos'.
+
+	* src/tagger/canvas.cc (button_release): Contiene el codigo
+	inicial para trabajar con triangulos.
+
+2003-06-05  Antonio-Miguel Corbi Bellot  <acorbi@hal9000>
+
+	* configure.ac: v1.99.35, "tenemos adjuntos"
+
+	* src/tagger/tag_model.cc (to_xml): Corregido el error q impedia
+	guardar tag_models sin hijos.
+
+	* src/tagger/sentence.cc (create_adjoint): Crea en la frase un
+	adjunto a partir de un text_item y un tag_item.
+
+2003-06-03  Antonio-Miguel Corbi Bellot  <acorbi@hal9000>
+
+	* configure.ac: v1.99.34, "casi, casi esta".
+
+	* src/tagger/tagger_view.cc (cm_disable_items): Permite
+	deshabilitar ciertos items del menu pop-up del canvas.
+	(cm_enable_items): Permite habilitar ciertos items del menu pop-up
+	del canvas.
+	(delete_node_option): Corregidos los errores que producian
+	violacion de segmento al borrar items (eran debidos a la pareja
+	vista/modelo, ya q borraba solo el modelo del item y seguia
+	dejando la vista). Llama a cm_disable_items o cm_enable_items
+	segun corresponda.
+
+2003-05-29  Antonio-Miguel Corbi Bellot  <acorbi@hal9000>
+
+	* configure.ac: v1.99.33, Aun no borra nodos...
+
+	* src/tagger/tagger_view.cc (delete_node_option): Falla con una
+	violacion de segmento, ya vere pq....
+
+	* src/tagger/tagger_view.cc (unparent_node_option): Permite quitar
+	hijos a un padre.
+	(show_popup_menu): Muestra el menu popup al pinchar el boton
+	derecho sobre el canvas, de momento este menu permite redibujar el
+	arbol, eliminar nodos y quitar padre a un nodo.
+
+2003-05-27  Antonio-Miguel Corbi Bellot  <acorbi@hal9000>
+
+	* configure.ac: v1.99.32, Creo q permite leer los ficheros de
+	arboratrix (aun sin triangulos) y reproducir los arboles, asi como
+	extraer la lista de etiquetas empleadas.
+
+2003-05-22  Antonio-Miguel Corbi Bellot  <acorbi@hal9000>
+
+	* configure.ac: He modificado la estructura modelo/vista para la
+	apertura de documentos, queda mejor asi.
+
+2003-05-21  Antonio-M. Corbi Bellot  <acorbi@peurl.dlsi.ua.es>
+
+	* configure.ac: Parece q ya funciona la 'apertura' de ficheros,
+	aunque la solucion no me gusta (mezcla codigo de modelo con el de
+	vista), en la siguiente version quiero algo mucho mas limpio.
+
+2003-05-20  Antonio-Miguel Corbi Bellot  <acorbi@hal9000>
+
+	* configure.ac: v1.99.29, cambios masivos vista/modelo, no
+	funciona bien por esto...
+
+2003-05-19  Antonio-M. Corbi Bellot  <acorbi@peurl.dlsi.ua.es>
+
+	* configure.ac: v1.99.28, empezamos a leer dentro poco.
+
+2003-05-16  Antonio-M. Corbi Bellot  <acorbi@peurl.dlsi.ua.es>
+
+	* src/tagger/sentence.cc (add_text_item): Tiene un parametro estra
+	q permite hacer q el item este seleccionado o no al crearse,
+	ademas las coordenadas 'x' e 'y' es opcional suministrarlas.
+	(add_tag_item): Tiene un parametro estra q permite hacer q el item
+	este seleccionado o no al crearse, ademas las coordenadas 'x' e
+	'y' es opcional suministrarlas.
+
+2003-05-15  Antonio-M. Corbi Bellot  <acorbi@peurl.dlsi.ua.es>
+
+	* src/tagger/sentence.cc (layout_tree_in_screen): Los nodos hojas
+	se pintan todos a la misma altura 'y' (tal y como comento Mikel).
+
+	* configure.ac: v1.99.27, comienzo ahora a escribir el codigo para
+	el nuevo formato de los ficheros xml.
+
+	* src/tagger/canvas_item.h (set_colors): La funcionalidad de los
+	GCs ha pasado del canvas a los Canvas_item, de este modo, ellos
+	'imponen' sus colores antes de ser dibujados.
+
+2003-05-14  Antonio-M. Corbi Bellot  <acorbi@peurl.dlsi.ua.es>
+
+	* configure.ac: v1.99.26, casi puedo leer ya los documentos.
+
+	* src/tagger/tagger_view.cc (new_document): Se encarga de crear un
+	documento nuevo en el modelo y de vaciar las listas de frases y
+	etiquetas (y sus entradas de texto) en la vista.
+
+	* src/tagger/tag_list.cc (dnd_data_received_cb): Avisa con un
+	mensaje si no hay frase a la q ponerle un 'tag'.
+
+	* src/tagger/list_manager.cc (add_callback): Permite mostrar un
+	mensaje de advertencia caso de q no se pueda añadir el elemento
+	por algun motivo. Lo hace mediante un metodo abstracto q debe ser
+	redefinido en clases derivadas.
+
+2003-05-13  Antonio-Miguel Corbi Bellot  <acorbi@hal9000>
+
+	* configure.ac: v1.99.25, se acerca el poder leer documentos.
+
+	* src/tagger/tagger_model.cc (new_document): Permite 'limpiar' la
+	memoria de trabajo q constituye el documento actual.
+
+	* src/tagger/list_manager.cc (clear): Limpia la lista de sus
+	elementos.
+
+	* src/tagger/tag_list.cc (add_item): En la clase base se comprueba
+	q no se puedan añadir tags repetidos.
+
+2003-05-13  Antonio-M. Corbi Bellot  <acorbi@peurl.dlsi.ua.es>
+
+	* src/tagger/sentence.cc (Sentence): El nodo raiz de la frase es
+	es un 'Tag_model' en lugar de un 'Text_model', ya q estos ultimos
+	no pueden tener hijos.
+
+2003-05-08  Antonio-M. Corbi Bellot  <acorbi@peurl.dlsi.ua.es>
+
+	* configure.ac: v1.99.24: 'tengo tag_items'.
+
+	* src/tagger/tag_item.cc (Tag_item): Añadidas las clases Tag_item
+	y Tag_model para representar los elementos q son etiquetas y no
+	solo textos formados a partir de palabras de la frase.
+
+	* src/tagger/canvas_item.h (draggable): Los canvas_item pueden ser
+	o no 'draggables', de este modo permitimos o no que se puedan
+	mover por el canvas.
+
+	* src/tagger/canvas_item.cc (mouse_drag): permite 'forzar' el
+	movimiento de un item aunque este no sea 'draggable'.
+
+	* src/tagger/tagger_view.cc (invert_selection_option): Ya podemos
+	seleccionar/deseleccionar todos los items del canvas, asi como
+	invertir la seleccion.
+
+2003-05-07  Antonio-M. Corbi Bellot  <acorbi@peurl.dlsi.ua.es>
+
+	* configure.ac: v1.99.23: tenemos DnD!.
+
+	* src/tagger/tag_list.cc (dnd_data_received_cb): Este metodo de
+	clase junto con otros permite añadir al canvas 'tags' desde la
+	lista de etiquetas mediante un interfaz 'drag and drop'.
+
+	* src/tagger/sentence.cc (add_item): Permite añadir un item a una
+	frase ya creada.
+
+	* src/tagger/list_manager.cc (List_manager): Corregido el error de
+	no iniciacion de plir/plsi/plvi.
+
+2003-05-06  Antonio-M. Corbi Bellot  <acorbi@peurl.dlsi.ua.es>
+
+	* configure.ac: v1.99.22, ya tocaba, ya...
+
+	* src/tagger/tag_list.cc (Tag_list): He comenzado a poner soporte
+	de DragAndDrop entre la lista de 'tags' y el 'canvas', de esta
+	manera pienso q se puedan añadir los tags a la frase en edicion.
+
+2003-04-29  Antonio-M. Corbi Bellot  <acorbi@peurl.dlsi.ua.es>
+
+	* src/tagger/sentence.cc (layout_tree_in_screen): Llama a
+	correct_negative_offset al final.
+
+2003-04-26  Antonio-M. Corbi Bellot  <acorbi@peurl.dlsi.ua.es>
+
+	* src/tagger/sentence.cc (to_xml): Comienza a guardar los
+	documentos en formato XML.
+
+2003-04-25  Antonio-M. Corbi Bellot  <acorbi@peurl.dlsi.ua.es>
+
+	* src/mvc/view.h (acb_mvc): get_model es virtual, asi puedo
+	cambiar el tipo de resultado en clases derivadas.
+
+2003-04-22  Antonio-M. Corbi Bellot  <acorbi@peurl.dlsi.ua.es>
+
+	* src/tagger/text_item.cc (show_properties): Muestra en un tooltip
+	la iinformacion que se crea conveniente.
+
+	* src/tagger/canvas.cc (Canvas): Se crea a partir de un
+	Tagger_view en lugar de un GtkWidget.
+
+2003-04-19  Antonio-M. Corbi Bellot  <acorbi@peurl.dlsi.ua.es>
+
+	* configure.ac: v1.99.21, comienza a dibujar bien las lineas de
+	padres a hijos, aunque debo arreglar (optimizar) los redibujados.
+
+2003-04-17  Antonio-M. Corbi Bellot  <acorbi@peurl.dlsi.ua.es>
+
+	* src/tagger/text_item.cc (get_children_width): Calcula la anchura
+	real en pixeles que hay entre el primer y el ultimo hijo de este
+	nodo.
+
+2003-04-10  Antonio-M. Corbi Bellot  <acorbi@peurl.dlsi.ua.es>
+
+	* src/tagger/sentence.cc (layout_tree_in_screen): Calcula las
+	coordenadas 'x' de cada nodo en base a la informacion que calcula
+	layout_tree_in_matrix.
+
+	* src/tagger/text_model.cc (get_cell_span): Esta funcion y todas
+	las q devolvian el calculo del 'span' en numero de celdas se han
+	renombrado a '_cell_span'.
+
+2003-04-08  Antonio-M. Corbi Bellot  <acorbi@peurl.dlsi.ua.es>
+
+	* configure.ac: v1.99.20, Arbol dibujado correctamente ( o casi
+	:).
+
+	* src/tagger/sentence.cc (correct_overlap): Corrige (trata de
+	hacerlo) el solape q puede surgir entre los nodos all
+	distribuirlos en funcion de la posicion de sus padres.
+	(correct_negative_offset): Si el arbol se sale por la izquierda,
+	corrige este desplazamiento negativo.
+
+2003-04-03  Antonio-M. Corbi Bellot  <acorbi@peurl.dlsi.ua.es>
+
+	* configure.ac: v1.99.19, permite 'reparentizar' nodos
+	visualmente, no dibuja el arbol de forma correcta, he de repasar
+	el algoritmo.
+
+2003-04-02  Antonio-M. Corbi Bellot  <acorbi@peurl.dlsi.ua.es>
+
+	* src/tagger/canvas.cc (move_selected_items): Corregido el
+	problema q aparecio al repintar un item sin antes borrarlo del
+	canvas (las letras apareciann borrosas):
+
+2003-04-01  Antonio-M. Corbi Bellot  <acorbi@peurl.dlsi.ua.es>
+
+	* src/tagger/canvas.cc (move_selected_items): Ya puedo mover nodos
+	por el canvas, se redibujan bien.
+
+2003-03-29  Antonio-M. Corbi Bellot  <acorbi@peurl.dlsi.ua.es>
+
+	* src/tagger/canvas.cc (set_sentence): En lugar de darle al canvas
+	la lista de items a pintar, subo un nivel conceptualmente, y le
+	paso la 'frase' q contiene esa lista de items, asi luego, el
+	canvas puede hacer cosas con la frase, que con solo la lista de
+	items no puede (por ejemplo, regenerar el arbol de la frase).
+
+	* configure.ac: v1.99.18, reune los dos cambios anteriores.
+
+	* src/tagger/tagger_view.cc (create_gui): He vuelto a ajustar el
+	tamaño del area de dibujo a 1280x1024, se me habia olvidado
+	hacerlo en glade.
+
+	* src/tagger/sentence.cc (layout_tree): Calcula las coordenadas
+	(x,y) apropiadas para cada nodo del arbol (arbol perfecto?).
+
+2003-03-27  Antonio-M. Corbi Bellot  <acorbi@peurl.dlsi.ua.es>
+
+	* configure.ac: v1.99.17, mas y mas cambios en busca del 'arbol
+	perfecto'.
+
+	* src/tagger/text_model.cc (get_childrem_text_items): Corregido el
+	error q devolvia siempre una lista con el padre y provocaba una
+	recursion infinita.
+
+2003-03-26  Antonio-M. Corbi Bellot  <acorbi@peurl.dlsi.ua.es>
+
+	* src/tagger/text_model.h (get_pos_in_span): Indica la posicion q
+	ocupa este nodo dentro del bloque de celdas q abarca junto a sus
+	hijos.
+
+	* src/tagger/text_model.cc (get_span): Devuelve cuantas celdas de
+	ancho ocupa este item y sus hijos directos.
+
+	* src/tagger/sentence.cc (get_tree_width): Calcula la anchura (en
+	celdas) maxima q tiene el arbol en un momento determinado.
+
+2003-03-25  Antonio-M. Corbi Bellot  <acorbi@peurl.dlsi.ua.es>
+
+	* src/tagger/sentence.cc (get_level_real_nodes): Devuelve la lista
+	de nodos reales de un nivel.
+	(get_level_virtual_nodes): Devuelve la lista de nodos virtuales de
+	un nivel.
+	(get_tree_total_levels): Devuelve el numero de niveles del arbol,
+	la raiz no visible esta en el 0.
+
+	* Makefile.am (.PHONY): Añadido el objetivo 'doc'.
+
+2003-03-20  Antonio-M. Corbi Bellot  <acorbi@peurl.dlsi.ua.es>
+
+	* configure.ac: v1.99.16, vamos en busca del dibujado del arbol de
+	forma correcta.
+
+	* src/tagger/sentence.cc (get_text_item_list_of_level): Obtiene la
+	lista de 'vistas' de los nodos de un nivel del arbol (la raiz
+	tiene el nivel maximo y no tiene vista sobre ella).
+	(get_max_text_height_of_level): Devuelve el tamaño en pixeles de
+	la vista con el font mayor en un nivel del arbol. Junto con la
+	anterior me servira para crear la funcion 'layout_tree' q debe
+	calcular las posiciones apropiadas de cada nodo del arbol.
+
+2003-03-18  Antonio-M. Corbi Bellot  <acorbi@peurl.dlsi.ua.es>
+
+	* configure.ac: v1.99.15, seguimos avanzando.
+
+	* src/tagger/text_model.cc (set_parent): Añadido el metodo
+	set_parent.
+	(get_childrem_text_items): Devuelve la lista de text_items
+	asociada a sus hijos, el receptor es responsable de liberarla.
+
+	* src/tagger/tagger_view.cc (about_option): Cambios en la creacion
+	del about-box.
+
+2003-03-13  Antonio-M. Corbi Bellot  <acorbi@peurl.dlsi.ua.es>
+
+	* configure.ac: v1.99.14, salto cualitativo!.
+
+	* src/tagger/sentence_list.cc (add_item): Cambios aqui y en
+	List_manager de manera q se detectan las frases añadidas, se crean
+	Sentences a partir de ellas y se añaden a la lista y luego se
+	pueden eliminar.
+
+2003-03-12  Antonio-M. Corbi Bellot  <acorbi@peurl.dlsi.ua.es>
+
+	* src/gui/info_dialog.cc (Info_dialog): Añadida esta clase para
+	mostrar diálogos de información con una única respuesta.
+
+	* src/gui/dialog.cc (key_pressed): Modificado el protipo, ahora
+	usa el q debia tener.
+	(esc_key_pressed): Idem a la anterior funcion.
+
+	* src/gui/dialog.h (set_modal): Ha pasado de la clase Window a
+	Dialog, es mas apropiado.
+
+2003-03-11  Antonio-M. Corbi Bellot  <acorbi@peurl.dlsi.ua.es>
+
+	* src/tagger/tagger_view.cc (exit_option): Funciona haciendo uso
+	de los dialogos yes_no.
+	(about_option): Funciona haciendo uso de los dialogos yes_no, cosa
+	q ha de cambiar.
+
+	* src/gui/yes_no_dialog.cc (Yes_no_dialog): Retoque rapido para q
+	vuelva a fucionar...no me gusta como ha quedado.
+
+2003-03-08  Antonio-M. Corbi Bellot  <acorbi@peurl.dlsi.ua.es>
+
+	* src/tagger/text_model.h (Model): El 'padre' de un item pasa al
+	modelo y deja de estar en la vista.
+
+2003-03-07  Antonio-M. Corbi Bellot  <acorbi@peurl.dlsi.ua.es>
+
+	* src/mvc/view.h (get_model): Permite saber cual es su modelo.
+
+	* src/tagger/sentence.cc (~Sentence): Libera la memoria q ocupan
+	los 'modelos' y 'vistas' q usa para representar las palabras q la
+	componen.
+
+	* src/tagger/tagger_model.cc (~Tagger_model): Vacia la lista de
+	frases y libera la memoria q ocupa cada una de ellas.
+
+2003-03-06  Antonio-M. Corbi Bellot  <acorbi@peurl.dlsi.ua.es>
+
+	* configure.ac: v1.99.12.
+
+	* src/tagger/sentence.cc (Sentence): Comienza el añadido de la
+	clase para representar las frases, de momento funciona.
+
+2003-02-05  Antonio-M. Corbi Bellot  <acorbi@hal9000>
+
+	* configure.ac: v1.99.11.
+
+	* src/tagger/tagger_model.cc (get_canvas): Permite obtener el
+	canvas del tagger_view q hay sobre este modelo.
+
+	* src/tagger/tagger_view.h (Constructor): Recibe como parametro un
+	'Tagger_model' en lugar de 'Model'.
+
+2003-01-27  Antonio-M. Corbi Bellot  <acorbi@hal9000>
+
+	* configure.ac: v1.99.10, preparando la 'entrada' de la clase
+	'Sentence' para poder crear objetos de la misma.
+
+2003-01-26  Antonio-M. Corbi Bellot  <acorbi@hal9000>
+
+	* src/tagger/canvas.cc (Canvas): La lista de items del canvas
+	ahora se guarda por referencia, de este modo la podemos
+	suministrar desde el exterior.
+
+2003-01-23  Antonio-Miguel Corbi Bellot  <acorbi@hal9000>
+
+	* configure.ac: v1.99.9.
+
+	* src/tagger/text_model.h (Model): El modelo del texto es el q
+	tiene la estructura arborescente.
+
+	* src/tagger/canvas_item.cc (Canvas_item): Se añaden
+	automaticamente a la lista de items de su canvas.
+
+2003-01-16  Antonio-Miguel Corbi Bellot  <acorbi@hal9000>
+
+	* configure.ac: v1.99.8.
+
+	* src/gui/window.cc (set_icon): Hace uso de las funciones de gtk2
+	en lugar de las de bajo nivel de gtk1.2.
+
+2003-01-15  Antonio-Miguel Corbi Bellot  <acorbi@hal9000>
+
+	* src/tagger/canvas_item.h (View): Mediante is_point_inside
+	podemos saber si un punto esta incluido en el rectangulo del item.
+
+	* src/tagger/canvas.h (Widget): Mediante get_item_at podemos saber
+	que item hay bajo unas coordenadas determinadas.
+
+	* src/tagger/text_model.h (Model): El metodo set_text ahora hace q
+	las vistas se actualicen tras modificar el modelo.
+
+	* src/tagger/canvas_item.cc (Canvas_item): Los canvas_items ya se
+	pueden mover por el canvas con el raton. He intentado optimizar el
+	redibujado y solo se pinta la parte del canvas q deja libre un
+	item al desplazarlo.
+
+	* src/tagger/text_item.cc (update): Solo se debe ver si no esta
+	oculto.
+
+2003-01-13  Antonio-M. Corbi Bellot  <acorbi@hal9000>
+
+	* configure.ac: v1.99.7.
+
+2003-01-12  Antonio-M. Corbi Bellot  <acorbi@hal9000>
+
+	* src/tagger/canvas.cc (draw_rectangle): Tiene un 2º parametro q
+	indica si se quiere dibujar relleno y en ese caso se usa el
+	contexto grafico 'gc' en lugar de 'rect_gc'.
+
+	* src/tagger/canvas_item.cc (draw_shadow): Un canvas_item puede
+	estar seleccionado y en ese caso puede pintarse con una 'sombra'
+	alrededor, este metodo calcula y dibuja la sombra.
+
+	* src/tagger/text_item.cc (Text_item): Añadida la clase Text_item,
+	representa vistas de texto sobre un modelo de texto.
+
+2003-01-11  Antonio-M. Corbi Bellot  <acorbi@hal9000>
+
+	* src/tagger/tagger_view.cc (create_gui): Corregido el error q
+	insertaba un contenedor horizontal de mas en la zona central de la
+	ventana principal.
+
+2003-01-10  Antonio-M. Corbi Bellot  <acorbi@hal9000>
+
+	* src/tagger/text_model.cc (Text_model): Creada la clase 'modelo'
+	del texto a dibujar sobre el canvas.
+
+	* src/tagger/canvas.h (draw_xxx): Los he hecho 'const' tal y como
+	debia ser.
+
+2003-01-09  Antonio-Miguel Corbi Bellot  <acorbi@hal9000>
+
+	* configure.ac: v1.99.6.
+
+	* src/tagger/canvas_item.cc (Canvas_item): Añadida la clase
+	Canvas_item.
+
+2003-01-08  Antonio-Miguel Corbi Bellot  <acorbi@hal9000>
+
+	* src/gui/widget.cc (~Widget): Detectado y corregido (gracias a
+	Efence) el error cometido al hacer 'gtk_widget_destroy' sobre un
+	widget despues de salir del bucle de espera de eventos de gtk.
+	(destroy_widget): Ahora contiene el codigo de liberación explícita
+	del widget de gtk que antes se hacia en el destructor de la clase
+	'Widget'.
+
+	* src/tagger/db_new_delete.cc: Include de <new> en lugar de
+	<new.h>.
+
+2003-01-07  Antonio-Miguel Corbi Bellot  <acorbi@hal9000>
+
+	* src/tagger/Makefile.am (arboratrix_SOURCES): Renombrado
+	'main.cc' a 'arboratrix.cc'.
+
+	* src/tagger/canvas.cc (draw_text): Añadido el soporte de UTF8,
+	ahora puede pintar todo tipo de caracteres!.
+	(draw_text): He sacado el objeto PangoLayout y FontDescription de
+	esta rutina, se crean una unica vez en el constructor de la clase.
+
+2003-01-06  Antonio-M. Corbi Bellot  <acorbi@hal9000>
+
+	* configure.ac: v1.99.5, Dia de Reyes.
+
+2003-01-04  Antonio-M. Corbi Bellot  <acorbi@hal9000>
+
+	* src/tagger/sentence_list.cc (set_finish_button):
+	Activa/desactiva por programa el check-button de frase
+	'finalizada' de analizar.
+	(get_finish_button): Obtiene el estado actual del check-button de
+	frase 'finalizada' de analizar.
+
+2003-01-02  Antonio-Miguel Corbi Bellot  <acorbi@hal9000>
+
+	* configure.ac: v1.99.4, seguimos avanzando.
+
+	* src/tagger/sentence_list.h (class Sentence_list): Incluye la
+	redefinicion del metodo 'update_interface' para q actualice el
+	check button 'finish'.
+
+	* src/tagger/list_manager.cc (connect_callbacks): Usa G_OBJECT y
+	G_CALLBACK como macros de conversion.
+
+	* src/tagger/sentence_list.cc (connect_callbacks): Usa G_OBJECT y
+	G_CALLBACK como macros de conversion.
+
+	* src/mvc/Makefile.am (CXXFLAGS): Se inicia a vacio pq por defecto
+	contiene '-g -O2'.
+
+	* src/gui/Makefile.am (CXXFLAGS): Se inicia a vacio pq por defecto
+	contiene '-g -O2'.
+
+	* src/tagger/Makefile.am (CXXFLAGS): Se inicia a vacio pq por
+	defecto contiene '-g -O2'.
+
+	* src/tagger/sentence_list.cc (finish_callback): Primera version
+	del metodo q se invoca al pulsar el boton 'finish'.
+
+	* src/tagger/canvas.cc (draw_point): Permite especificar la
+	anchura del punto.
+	(draw_text): Primera version del metodo q permite dibujar texto en
+	el canvas.
+
+	* src/tagger/tagger_model.cc (Tagger_model): Uso de namespace
+	'std::'.
+
+	* src/tagger/tag_list.cc (Tag_list): Uso de namespace 'std::'.
+
+	* src/tagger/sentence_list.cc (Sentence_list): Uso de namespace
+	'std::'.
+
+	* src/tagger/list_manager.cc (List_manager): Uso de namespace
+	'std::'.
+
+	* src/tagger/tagger_view.cc (Tagger_view): Uso de namespace
+	'std::'.
+
+2003-01-01  Antonio-M. Corbi Bellot  <acorbi@hal9000>
+
+	* configure.ac: v1.99.3, post-noche-vieja.
+
+	* src/tagger/main.cc: Incluye app_icon.h en lugar de pixmaps.h.
+
+	* src/tagger/app_icon.h: Contiene el pixmap con el icono de
+	arboratrix.
+
+	* src/gui/widget.cc (connect_callbacks): Incluye la gestion de
+	eventos 'configure'.
+	(change_mouse_shape): Cambio de gdk_pixmap_unref a g_object_unref.
+
+	* src/tagger/canvas.cc (button_press): Distingue entre pulsaciones
+	de distintos botones del raton.
+
+2002-12-30  Antonio-M. Corbi Bellot  <acorbi@hal9000>
+
+	* src/gui/widget.cc (connect_callbacks): La clase Widget incluye
+	la gestion de los eventos de bajo nivel expose, button-press,
+	button-release y motion_notify.
+
+	* configure.ac: v1.99.2, pre-noche-vieja.
+
+	* src/gui/widget.cc (change_mouse_shape): Permite cambiar el raton
+	asociado a un acb_gui::Widget.
+
+2002-12-27  Antonio-M. Corbi Bellot  <acorbi@hal9000>
+
+	* Doxyfile (PROJECT_NUMBER): v1.99.x.
+
+2002-12-26  Antonio-M. Corbi Bellot  <acorbi@hal9000>
+
+	* src/tagger/tag_list.h (class Tag_list): Representa un widget
+	lista-de-tags-bot.añadir-bot-eliminar.
+
+	* src/tagger/sentence_list.h (class Sentence_list): Representa un
+	widget lista-de-frases-bot.añadir-bot-eliminar.
+
+	* src/tagger/list_manager.h (List_manager): He seguido añadiendo cambios
+	para completarla.
+
+	* src/tagger/Makefile.am (arboratrix_SOURCES): Añadidos los
+	fuentes de sentence_list.{h,cc} y tag_list.{h,cc}.
+
+	* src/tagger/list_manager.h (List_manager): Clase base para
+	reprsentar un widget compuesto 'lista' con botones para añadir un
+	texto y para borrar un texto de la lista.
+
+	* src/tagger/Makefile.am (AM_CPPFLAGS): El camino de busqueda de
+	cabeceras se queda en 'top_srcdir/src', de este modo debo
+	especificar si una cebecera viene de 'mvc/' o de 'gui/'.
+
+2002-12-24  Antonio-M. Corbi Bellot  <acorbi@hal9000>
+
+	* src/mvc/model.h (acb_mvc): Incluye un metodo abstracto 'update'
+	para actualizar el modelo desde la vista.
+
+	* src/mvc/view.h (acb_mvc): Incluye 'sishitra_config.h' y hace uso
+	del define 'ABSTRACT' para metodos virtuales puros.
+
+2002-12-23  Antonio-Miguel Corbi Bellot  <acorbi@hal9000>
+
+	* configure.ac: v1.99.1.
+
+	* src/gui/widget.cc (Widget): Antes de destruir el widget de gtk,
+	comprueba q es un widget valido.
+
+	* src/mvc/Makefile.am (all): Soporta la generacion automatica de
+	la cabecera 'acb_mvc.h'.
+
+	* src/gui/Makefile.am (all): Soporta la generacion automatica de
+	la cabecera 'acb_gui.h'.
+
+	* src/mvc/Makefile.am: Añadido de los fuentes para el soporte de
+	MVC.
+
+	* src/model/Makefile.am (libacb_mvc_la_SOURCES): Comienzo de la
+	version 1.99.0 que dara paso a la version 2.0.0. Ahora uso
+	claramente MVC.
+
+2002-12-09  Antonio-M. Corbi Bellot  <acorbi@hal9000>
+
+	* src/tagger/tagger.h (Window): Corregido el error en
+	'get_finish_button' la cual no devolvia nada.
+
+	* src/tagger/Makefile.am (AM_CXXFLAGS): Uso de -Wall. Probando el
+	compilador de Intel he descubierto un fallo en tagger.cc.
+
+	* src/gui/Makefile.am (AM_CXXFLAGS): Uso de -Wall.
+
+	* config/acinclude.m4: Adaptado al uso de las macros
+	AC_COMPILE_IFELSE, AC_LINK_IFELSE, AC_LANG_PUSH y AC_LANG_POP en
+	mis propias macros de comprobacion del compilador de C++.
+
+2002-12-07  Antonio-M. Corbi Bellot  <acorbi@hal9000>
+
+	* configure.ac: Gran cantidad de cambios hechos despues de leer la
+	documentacion de autoconf2.57. Aun me quedan por 'retocar' mis
+	macros personales de comprobacion de STL dado que uso macros en
+	ellas que han desaparecido.
+
+	* src/gui/Makefile.am (AM_CXXFLAGS): Uso de esta macro en lugar
+	de CXXFLAGS.
+
+	* src/tagger/Makefile.am (AM_CXXFLAGS): Uso de esta macro en lugar
+	de CXXFLAGS.
+
+2002-12-05  Antonio-Miguel Corbi Bellot  <acorbi@hal9000>
+
+	* configure.ac: v0.8.4, rla.
+
+2002-12-03  Antonio-Miguel Corbi Bellot  <acorbi@hal9000>
+
+	* src/gui/fixed_tip.cc (Fixed_tip): La clase Fixed_tip ya funciona
+	y puede sustituir a la empleada hasta las versiones 0.7.x de
+	arboratrix.
+
+2002-12-02  Antonio-M. Corbi Bellot  <acorbi@hal9000>
+
+	* configure.ac: v0.8.3.
+
+	* bootstrap: Uso de '-I' al llamar a autoheader.
+
+	* src/gui/Makefile.am (libacb_gui_la_SOURCES): Añadidos los
+	ficheros fixed_tip.{h,cc}.
+
+2002-11-28  Antonio-Miguel Corbi Bellot  <acorbi@hal9000>
+
+	* configure.ac: v0.8.2, rla.
+
+	* src/tagger/Makefile.am (CXXFLAGS): Uso de '-pipe'.
+
+	* src/gui/Makefile.am (CXXFLAGS): Uso de '-pipe'.
+
+2002-11-27  Antonio-Miguel Corbi Bellot  <acorbi@hal9000>
+
+	* src/gui/Makefile.am (EXTRA_DIST): Renombrados los ficheros
+	fixedtip.{cc,h} a old_fixedtip hasta que cree los nuevos.
+
+2002-11-25  Antonio-M. Corbi Bellot  <acorbi@hal9000>
+
+	* src/tagger/tagger.cc (open_option): Este y otros metodos han
+	sido adaptados a la pertenencia de la clase 'Yes_no_dialog' al
+	interfaz (gui) en lugar del etiquetador.
+
+	* src/gui/yes_no_dialog.h: 'Yes_no_dialog' ahora forma parte del
+	codigo del interfaz, no del etiquetador.
+
+2002-11-24  Antonio-M. Corbi Bellot  <acorbi@hal9000>
+
+	* configure.ac: v0.8.1, para reflejar los avances en esta rama.
+
+	* bootstrap: aclocal deposita 'aclocal.m4' en el directorio raiz
+	del proyecto en lugar del subdirectorio 'config'.
+
+	* src/tagger/yes_no_dialog.cc (Yes_no_dialog): Comenzada la
+	adapatacion al uso de 'gtk_message_dialog_new'.
+
+	* src/tagger/tagger.cc (quick_message): Adaptado al uso de 'gtk_message_dialog_new'.
+	(quick_message): Hace uso de UTF8.
+
+2002-08-15  Antonio-M. Corbi Bellot  <acorbi@hal9000>
+
+	* configure.ac: v0.7.13, adaptada a los nuevos requerimientos de
+	autoconf/automake.
+
+	* src/tagger/latexer.cc (open): Uso de PACKAGE_VERSION en lugar de
+	VERSION y PACKAGE_NAME en lugar de sólo PACKAGE.
+
+	* src/tagger/tagger.cc (about_option): Uso de PACKAGE_VERSION en
+	lugar de VERSION y PACKAGE_NAME en lugar de sólo PACKAGE.
+
+	* src/tagger/main.cc (main): Uso de PACKAGE_VERSION en lugar de
+	VERSION.
+
+	* configure.ac: Uso de AC_CONFIG_HEADERS en lugar de
+	AM_CONFIG_HEADER, asi lo pide la nueva versin de
+	autoconf/automake.
+
+2002-06-17  Antonio-M. Corbi Bellot  <acorbi@hal9000>
+
+	* configure.ac: v0.7.12, recoge lo anterior.
+
+	* src/tagger/tagger.cc (from_xml_to_sentences): Recupera el texto
+	original de la frase a partir del atributo 'text' que lo contiene.
+
+	* src/tagger/sentence.cc (to_xml): Guarda en un atributo de la
+	frase el texto original de la misma, de este modo aunque se
+	cambien el orden de las palabras seguimos sabiendo cual era la
+	frase original.
+
+	* src/tagger/sentence.h (Object): Añadido un metodo para cambiar
+	el texto de la frase.
+
+	* configure.ac: v0.7.11, recoge lo anterior.
+
+	* src/tagger/tagger.cc (from_xml_to_sentences): Corregido el error
+	que generaba seg. faults. al leer ficheros 'antiguos' de
+	arboratrix sin la propiedad 'finished'.
+
+2002-06-15  Antonio-M. Corbi Bellot  <acorbi@hal9000.dlsi.ua.es>
+
+	* configure.ac: v0.7.10, recoge los cambios anteriores.
+
+	* src/tagger/tagger.cc (update_interface): Se encarga de
+	actualizar algunos elementos del interfaz segun el estado actual
+	del documento.
+
+	* src/tagger/sentence.cc (to_xml): Guarda el estado 'finished' de
+	etiquetado correctamente.
+
+	* src/tagger/tagger.cc (from_xml_to_sentences): Recupera el estado
+	'finished' de etiquetado correctamente.
+
+2002-06-11  Antonio-M. Corbi Bellot  <acorbi@hal9000>
+
+	* configure.ac: v0.7.9, recoge lo anterior.
+
+	* src/tagger/sentence.cc (tokenize): Separa los simbolos de
+	puntutacion de las palabras, de este modo se pueden tratar como
+	nodos independientes.
+
+	* src/tagger/tagger.cc (reparent_node_option): Ahora crea bien los
+	adjuntos cuando se hacen cambiando 're-empadronando'.
+
+2002-05-27  Antonio-M. Corbi Bellot  <acorbi@hal9000.dlsi.ua.es>
+
+	* configure.ac: v 0.7.8, recoge lo anterior.
+
+	* src/gui/fixedtip.cc: Soporte de tooltips independiente de un
+	widget, de momento esta a nivel de pruebas.
+
+2002-05-22  Antonio-M. Corbi Bellot  <acorbi@hal9000>
+
+	* src/tagger/tagger.cc (triangle_group_option): Solo deja agrupar
+	como triangulo si alguno de los items seleccionados es terminal.
+
+	* configure.ac: v0.7.6-demo, recoge los ultimos cambios sugeridos
+	por Mikel a 'penultima-hora'.
+
+	* src/tagger/triangle_item.cc (draw_lines_to_children): Solo
+	dibuja el triangulo si este tiene hijos.
+
+	* src/tagger/tagger.cc (triangle_group_option): Permite crear
+	triangulos con un solo item hijo.
+	(unparent_node_option): Le da igual que un padre triangulo se
+	quede con un solo hijo o menos.
+
+	* configure.ac: v0.7.5-demo, la version que mostraremos en la demo
+	de mañana (si no hay ningun error pendiente de arreglar).
+
+	* src/tagger/tagger.cc (reparent_node_option): No deja añadir
+	hijos no-terminales a un triangulo.
+
+	* src/tagger/canvas_item.cc (get_all_words_children): Renombrada
+	desde 'get_all_leaves_children', este nombre es mas
+	apropiado. Solo recoge en una lista aquellos items que sean hojas
+	(sin hijos) y que no sean etiquetas.
+
+	* src/tagger/sentence.cc (build_words_list): Renombrada desde
+	'build_leaves_list', este nombre es mas apropiado.
+	(build_sentence_from_words): Idem a la anterior.
+
+2002-05-21  Antonio-M. Corbi Bellot  <acorbi@dlsi.ua.es>
+
+	* src/tagger/triangle_item.h (class Triangle_item): El metodo
+	'set_tag' se redefine a vacio, ya que un triangulo no cambia su
+	etiqueta, esta siempre es 'impl'.
+
+2002-05-20  Antonio-M. Corbi Bellot  <acorbi@hal9000.dlsi.ua.es>
+
+	* configure.ac: v0.7.2, recoge los cambios anteriores.
+
+	* src/tagger/tagger.cc (create_tags_menu): Eliminadas -creo- las
+	'fugas' de memoria debidas a no borrar 2 de los 3 menus
+	jerarquicos con etiquetas cada vez que se generaban.
+
+	* src/tagger/canvas_item.cc (is_adjoint): Corregido el error que
+	hacia identificar mal a un adjunto.
+
+	* src/tagger/Makefile.am (DEPDIR): He tenido que añadir esta
+	variable de automake junto a OBJEXT pq habian desaparecido...
+
+2002-05-19  Antonio-M. Corbi Bellot  <acorbi@hal9000.dlsi.ua.es>
+
+	* configure.ac: v0.7.1, recoge lo anterior, espero que haya pocos
+	cambios de aqui a la demo.
+
+	* src/tagger/tagger.cc (tree_group_option): Tiene en cuenta la
+	creacion de adjuntos.
+	(delete_node_option): Parece que estan arreglados los casos donde
+	se producia un seg.fault., aunque hay que probarlo mas. 
+	(create_adjoint): Para crear un adjunto el padre del item 'hoja'
+	ha de ser 'root' --salvo que me digan lo contrario--.
+
+2002-05-18  Antonio-M. Corbi Bellot  <acorbi@hal9000.dlsi.ua.es>
+
+	* src/tagger/tagger.cc (delete_node_option): Comienza a 'entender'
+	como se elimina un adjunto, aunque a veces aun falla (seg.fault.).
+
+	* src/tagger/triangle_item.cc (draw_lines_to_children): Antes de
+	pintar el triangulo, ordena por coordenada 'x' la lista de sus
+	hijos. Ha sido necesario al permitir añadir items a un nodo
+	'arbol' o 'triangulo'.
+
+	* src/tagger/tagger.cc (reparent_node_option): Recibe un segundo
+	parametro booleano que nos dice si el usuario quiere crear un
+	adjunto.
+	(tree_group_option): Renombrada desde 'group_option' para ser
+	coherente.
+
+	* src/tagger/canvas_item.h (Object): El metodo
+	'Canvas_item::is_tag' nos dice si un nodo puede ser padre de
+	otros.
+
+	* configure.ac: v0.7.0, recoge lo anterior.
+
+	* src/tagger/tagger.cc (da_button_release_event): Permite la
+	'asignacion de nuevo padre (reparent)' arrastrando uno o varios
+	nodos encima del nuevo padre. Estos nodos no tienen que ser hijos
+	de nadie.
+	(reparent_node_option): Recibe como parametro un nuevo nodo que
+	sera el padre de los nodos que haya seleccionado el usuario hasta
+	ese momento.
+
+	* src/tagger/sentence.cc (get_item_at): Adapatado al cambio hecho
+	en el metodo del mismo nombre en la clase Canvas_item.
+
+	* src/tagger/canvas_item.cc (get_item_at): Añadido un parametro
+	mas indica si es distinto de NULL que buscamos un item en esas
+	coordenadas que no sea ese.
+
+2002-05-17  Antonio-M. Corbi Bellot  <acorbi@hal9000.dlsi.ua.es>
+
+	* src/tagger/tagger.cc (unparent_node_option): Tiene en cuenta si
+	el padre es un 'triangulo' y solo deja quitarle hijos hasta que
+	este se quede como minimo con 2 --no puede haber un 'triangulo'
+	con menos de 2 hijos--.
+
+2002-05-16  Antonio-M. Corbi Bellot  <acorbi@hal9000>
+
+	* src/tagger/tagger.cc (unparent_node_option): Ya podemos quitar
+	el padre a un nodo y dejarlo a este ultimo 'colgando' de la raiz
+	del arbol.
+	(change_tag_option): Tambien permite cambiar una etiqueta por otra
+	de las existentes.
+
+	* src/tagger/yes_no_dialog.cc (show): Hace un grab de la ventana
+	de estos dialogos de modo que sean 'toalmente' modales y ademas
+	tengan su propio bucle de captura de eventos.
+	(accept): Y tambien 'cancel' cancelan el grab hecho en show y
+	salen del bucle de espera de ventos local.
+
+2002-05-15  Antonio-M. Corbi Bellot  <acorbi@hal9000>
+
+	* src/tagger/tagger.cc (set_font_name_exit_cb): Despues de cambiar
+	el tipo de letra fuerza un redibujado del arbol mediante
+	'canonical_tree'.
+	(set_font_name_cb): Idem al anterior.
+	(save_as_option): Implementada correctamente, ahora es distinta de
+	'save_option', ademas de informar en el titulo de la ventana del
+	nombre del fichero asociado al documento. 
+
+2002-05-13  Antonio-M. Corbi Bellot  <acorbi@hal9000.dlsi.ua.es>
+
+	* configure.ac: v0.6.2, ya tenemos agrupacion/separacion de
+	palabras.
+
+	* src/tagger/tagger.cc (delete_node_option): Llama a
+	'canonical_tree' en lugar de 'force_canvas_redraw', produce mejor
+	resultado del arbol redibujado. Esta misma opcion la he tomado en
+	otros puntos del codigo.
+
+	* src/tagger/sentence.h (remove_item): Tras quitar el item de la
+	lista de items, hace un delete sobre el.
+
+	* src/tagger/canvas_item.cc (~Canvas_item): 'delete' de cada hijo.
+
+2002-05-12  Antonio-M. Corbi Bellot  <acorbi@hal9000.dlsi.ua.es>
+
+	* src/tagger/tagger.cc (about_option): Adaptado tagger.cc al uso
+	de strstream en lugar de stringstream.
+
+2002-05-11  Antonio-M. Corbi Bellot  <acorbi@hal9000.dlsi.ua.es>
+
+	* src/tagger/triangle_item.h (class Triangle_item): Los items
+	triangulos siempre son 'borrables'.
+
+2002-05-10  Antonio-M. Corbi Bellot  <acorbi@hal9000.dlsi.ua.es>
+
+	* src/tagger/canvas_item.cc (set_selected): Ademas de modificar el
+	estado del item, este informa a la frase a la que pertenece de que
+	ha sido seleccionado o deseleccionado.
+
+	* src/tagger/tagger.cc (triangle_group_option): Renombrada de
+	'group_triangle_option' para ser consistente con otros metodos
+	similares.
+
+	* src/tagger/sentence.cc (remove_selected_items): Elimina de la
+	frase todos los items seleccionados.
+
+2002-05-09  Antonio-M. Corbi Bellot  <acorbi@hal9000>
+
+	* configure.ac: v0.6.1, incluye lo anterior y pretende obtener la
+	incorporacion de la accion 'word_group/ungroup'.
+
+	* src/tagger/tagger.cc (create_tags_menu): Rediseño del menu del
+	canvas, pensando en la incorporacion de la 'accion' de unir varia
+	palabras en una misma entidad (word_group).
+
+	* src/tagger/sentence.cc (get_selected_items): Antes de devolver
+	la lista la ordena por coordenada 'x' de los items que
+	contiene. No hace daño a nadie y me viene bien en muchos casos.
+	
+2002-05-08  Antonio-M. Corbi Bellot  <acorbi@hal9000.dlsi.ua.es>
+
+	* configure.ac: v0.6.0, recoge los cambios anteriores.
+
+	* src/tagger/triangle_item.cc (to_xml): Indica como se reprsenta
+	un triangulo en XML.
+
+	* src/tagger/tagger.cc (from_xml_to_sentences): Entiende los nodos
+	'triangulo'.
+
+2002-05-06  Antonio-M. Corbi Bellot  <acorbi@hal9000.dlsi.ua.es>
+
+	* configure.ac: v0.5.10, recoge lo anterior. Ahora voy a añadir el
+	soporte de grabacion y lectura de xml con 'triangulos'.
+
+	* src/tagger/tagger.cc (create_tags_menu): Por sugerencia de
+	Verdu, los tags disponibles se agrupan en dos submenus: Tree y
+	Triangle, dependiendo del tipo de union que queramos hacer.
+
+	* src/tagger/text_item.cc (to_qtree): Las raices de los arboles
+	las pone en negrita.
+
+2002-05-02  Antonio-M. Corbi Bellot  <acorbi@hal9000>
+
+	* configure.ac: v0.5.9, recoge lo anterior.
+
+	* src/tagger/triangle_item.cc (Triangle_item): Crea un nodo
+	'triangulo'.
+
+	* src/tagger/tagger.cc (create_tags_menu): Añade la opcion de
+	creacion de triangulos, aunque no esta implementada todavia.
+	(group_triangle_option): Realiza la agrupacion con triangulos.
+	(create_tags_menu): Crea el sub-menu de tags para agrupar con
+	triangulos.
+
+2002-05-01  Antonio-M. Corbi Bellot  <acorbi@hal9000.dlsi.ua.es>
+
+	* configure.ac: v0.5.8, incluye la exportacion a PDF.
+
+	* src/tagger/latexer.cc (to_pdf): Exporta a PDF tambien.
+
+	* src/tagger/tag_dialog.cc (accept): Devuelve el foco al widget de
+	entrada de texto para la siguiente etiqueta.
+
+	* src/tagger/tagger.cc (create_tags_menu): Antes de crear el menu
+	con los tags, ordena la lista donde estan (tag_list) e inserta
+	ordenadas alfabeticamente las etiquetas.
+
+	* src/tagger/tag_dialog.cc (cancel): Solo indicamos al tag_list
+	que ha terminado la sesion de insercion de nuevos tags si
+	realmente se ha añadido alguno.
+
+	* configure.ac: v0.5.7, recoge los cambios anteriores.
+
+	* src/tagger/tag_list.cc (add_new_tags_finished): Se invoca cuando
+	el usuario finaliza la interaccion con el dialogo de insercion de
+	tags. La usamos para 'regenerar' al vuelo el menu jerarquico con
+	los tags disponibles.
+
+	* src/tagger/tagger.cc (add_new_tags_option): Abre el dialogo que
+	solicita nuevos tags y los añade a la lista de tags actuales.
+
+2002-04-29  Antonio-M. Corbi Bellot  <acorbi@hal9000>
+
+	* src/tagger/tag_dialog.cc (update_tags_list): Renueva la lista
+	mostrada al usuario con lo que hay en el modelo.
+
+2002-04-25  Antonio-M. Corbi Bellot  <acorbi@hal9000>
+
+	* configure.ac: v0.5.5, recoge los cambios anteriores.
+
+	* src/tagger/tag_list.cc (tag_exists): Dice si un tag ya existe.
+	(tag_is_valid): Dice si un tag es valido.
+
+	* src/gui/window.cc (set_wm_close): Corregido error donde la
+	variable 'sh' era comun a todas las ventanas y no particular a
+	cada una de ellas.
+
+	* src/tagger/tag_list.h (Object): La clase Tag_list gestiona una
+	lista de tags y proporciona un dialogo para añadir nuevas.
+
+	* src/gui/dialog.cc (dialog_accepted): Metodo de clase encargado
+	de invocar al de instancia abstracto que redefinen clases
+	derivadas.
+	(dialog_cancelled): Idem al anterior pero para el caso que se
+	'cancela' el dialogo.
+
+2002-04-24  Antonio-M. Corbi Bellot  <acorbi@hal9000>
+
+	* src/tagger/tagger.cc (cm_enable_sentence_items): Solo habilita
+	la opcion 'delete' si hay elegido algun item con hijos.
+	(create_canvas_menu): La opcion 'ungroup' se ha renombrado a
+	'delete' que es lo que realmente hacia.
+
+	* src/tagger/latexer.cc (open): Cambios en el codigo latex
+	generado, añade cabeceras y pies de pagina.
+
+2002-04-22  Antonio-M. Corbi Bellot  <acorbi@hal9000.dlsi.ua.es>
+
+	* configure.ac: v0.5.0, Imprime documento postscript con el arbol
+	de cada frase.
+
+	* src/tagger/latexer.cc (to_ps): El metodo encargado de recibir
+	una lista de frases, crear un documento latex para ellas,
+	compilarlo y generar un PS donde el usuario haya dicho.
+
+2002-04-21  Antonio-M. Corbi Bellot  <acorbi@hal9000.dlsi.ua.es>
+
+	* src/tagger/latexer.h (Object): La clase Latexer permite
+	'imprimir' a un fichero PS el documento actual. Para ello me valgo
+	de LaTeX y Qtree.
+
+2002-04-20  Antonio-M. Corbi Bellot  <acorbi@hal9000.dlsi.ua.es>
+
+	* src/tagger/sentence.cc (to_ps): Comenzada la generacion de un
+	documento PS a partir de uno latex con el arbol de cada frase en
+	formato qtree y como una figura.
+
+	* src/tagger/tagger.cc (update_sentence_count): Traducida la frase
+	sobre la cuenta de frases.
+
+2002-04-18  Antonio-M. Corbi Bellot  <acorbi@hal9000.dlsi.ua.es>
+
+	* src/tagger/sentence.cc (to_qtree): Parche para el caso especial
+	de frase con un solo nodo colgando de la raiz.
+
+2002-04-18  Antonio-M. Corbi Bellot  <acorbi@hal9000>
+
+	* configure.ac: v0.4.0, arboratrix escribe/lee en XML sus
+	documentos y es capaz de exportar a formato 'qtree'.
+
+	* src/tagger/tagger.cc (save_document_qtree): Guarda el arbol para
+	cada frase del documento en formato qtree. Una frase por cada linea.
+
+	* src/tagger/text_item.cc (to_xml): Corregido el fallo que hacia
+	no generar arboles validos en determinadas ocasiones.
+
+2002-04-17  Antonio-M. Corbi Bellot  <acorbi@hal9000>
+
+	* src/tagger/tagger.cc (from_xml_to_sentences): Importa el fichero
+	XML, separa y crea las frases, y para cada frase crea los nodos,
+	aunque todavia queda algo mal aquí.
+
+	* src/tagger/sentence.cc: Añadida variable de clase
+	'default_height' para colocar los nodos incialmente a una misma
+	altura. Anteriormente los ponia siempre a '120', ahora al leer un
+	documento XML puedo preguntar a la frase cómo debe colocarlos de
+	alto inicialmente.
+
+2002-04-15  Antonio-M. Corbi Bellot  <acorbi@hal9000.dlsi.ua.es>
+
+	* src/tagger/sentence.cc (Sentence): El parametro 's' de tipo
+	string del constructor se pasa ahora por valor en lugar de
+	referencia ya que estaba ocasionando violaciones de segmento.
+
+	* src/tagger/tagger.cc (from_xml_to_sentences): Mejorado el
+	recorrido del arbol XML, aun falta detectar sus nodos
+	completamente y construir el arbol en memoria.
+
+2002-04-11  Antonio-M. Corbi Bellot  <acorbi@hal9000.dlsi.ua.es>
+
+	* src/tagger/sentence.cc (build_sentence_from_leaves): Crea la
+	cadena que representa la frase a partir de los nodos hoja.
+
+2002-04-08  Antonio-M. Corbi Bellot  <acorbi@hal9000.dlsi.ua.es>
+
+	* configure.ac: v0.3.7pre2, mejorado algo la lectura xml en
+	Tagger::from_xml_to_sentences.
+
+2002-04-07  Antonio-M. Corbi Bellot  <acorbi@hal9000.dlsi.ua.es>
+
+	* src/gui/window.cc (set_icon): Permite poner un xpm como icono de
+	la ventana.
+
+2002-04-02  Antonio-M. Corbi Bellot  <acorbi@hal9000>
+
+	* configure.ac: v0.3.6, refleja lo anterior. Paso a realizar la
+	carga del fichero XML y transformacion en mi estructura interna de
+	datos.
+
+	* src/tagger/tagger.cc (save_document_xml): Terminada la grabacion
+	en formato XML usando libxml.
+	(new_document): LLamada por new_option para 'limpiar' la memoria
+	actual ocupada por un documento.
+
+2002-04-01  Antonio-M. Corbi Bellot  <acorbi@hal9000.dlsi.ua.es>
+
+	* Makefile.am (doc): Añadido el target doc para generar
+	documentacion con doxygen.
+
+2002-03-30  Antonio-M. Corbi Bellot  <acorbi@hal9000.dlsi.ua.es>
+
+	* configure.ac: v0.3.5, a partir de ahora voy a cambiar la
+	generacion del arbol XML, el guardado e implementar la lectura.
+
+2002-03-29  Antonio-M. Corbi Bellot  <acorbi@hal9000.dlsi.ua.es>
+
+	* src/tagger/canvas_item.cc (sort_children_by_x_coord): Ordena
+	internamente en la lista de hijos de un nodo los nodos que la
+	forman en base a su menor coordenada 'x', de este modo al generar
+	un arbol xml, la posicion de sus nodos se corresponde con la que
+	el usuario ve en pantalla.
+	(citem_less): Ha 'saltado' desde 'Sentence' a Canvas_item, asi
+	puedo implementar lo anterior (sort_children_by_x_coord) y ademas
+	sigue funcionando en Sentence.
+
+2002-03-21  Antonio-M. Corbi Bellot  <acorbi@hal9000>
+
+	* configure.ac: v0.3.4, refleja lo anterior.
+
+	* src/tagger/sentence.cc (to_xml): El volcado xml se empieza a
+	parecer a lo que dice Mikel, falta ordenar por coordenada 'x'
+	menor los nodos hijos de cada nodo para que asi el arbol guardado
+	mantenga la misma disposicion que la que el usuario ve en pantalla
+	al guardarlo.
+
+	* src/tagger/tag_item.h (class Tag_item): Clase que representa las
+	etiquetas que va colocando el linguista.
+
+	* src/tagger/tagger.cc (group_option): Crea tag_items en lugar de
+	text_items.
+
+	* src/tagger/sentence.cc (add_text_item_at): nuevo nombre, antes
+	era 'add_item_at'. Hecho para diferenciar de 'add_tag_item_at'.
+
+2002-03-19  Antonio-M. Corbi Bellot  <acorbi@hal9000.dlsi.ua.es>
+
+	* configure.ac: v0.3.3, refleja lo anterior.
+
+2002-03-14  Antonio-M. Corbi Bellot  <acorbi@hal9000.dlsi.ua.es>
+
+	* configure.ac (DATE): 'Define' con la fecha de compilación.
+	(ABSTRACT): 'Define' para los metodos abstractos.  Añadida la
+	opción '--enable-g3' para compilar con g++ 3.0.x, ya no fuerzo a
+	usar este compilador, se puede elegir entre 2.95.x y 3.0.x.
+
+	* src/tagger/main.cc (main): Muestra la fecha de compilación en la
+	barra de estado nada mas arrancar la aplicación.
+
+	* src/tagger/tagger.cc (quick_message_sb): Pasa a ser publica,
+	puede ser interesante mostrar mensajes en la ventana del tagger
+	desde fuera de ella.
+
+	* configure.ac: Fuerzo a que el compilador sea g++-3.0. He tenido
+	que adaptar los fuentes para que hiciesen uso del namespace 'std'.
+
+2002-03-13  Antonio-M. Corbi Bellot  <acorbi@hal9000>
+
+	* src/tagger/sentence.cc (to_xml): Comenzado el cambio en la forma
+	de guardar el fichero xml, de momento ya no aparece toda la
+	informacion adicional referente a la parte grafica.
+
+2002-03-11  Antonio-M. Corbi Bellot  <acorbi@hal9000.dlsi.ua.es>
+
+	* configure.ac: v0.3.1, incluye primera version de
+	'ensure_inside'.
+
+	* src/tagger/tagger.cc (set_font_name_cb): Fuerza un redibujado
+	del canvas ya que en ocasiones era necesario.
+
+	* src/tagger/sentence.cc (ensure_inside): Asegura que los items
+	más arriba y más a la izquierda del arbol se dibujan dentro del
+	canvas, actualizando correctamente las coordenadas del resto de
+	items del arbol. Se llama al 'agrupar' varios nodos y al
+	'reordenar' el arbol.
+
+2002-03-07  Antonio-M. Corbi Bellot  <acorbi@hal9000>
+
+	* src/tagger/tagger.cc (reorder_tree_option): v0.3.0, ya reordena
+	el arbol segun un algoritmo propio que produce resultados
+	aceptables.
+
+2002-03-06  Antonio-M. Corbi Bellot  <acorbi@hal9000>
+
+	* configure.ac: v0.2.11 para reflejar lo anterior.
+
+	* src/tagger/tagger.cc (group_option): Las coordenadas del padre
+	se calculan en base a su lista de hijos y no a la de nodos
+	seleccionados (aunque inicialmente coincidan). Ademas la
+	coordenada 'y' de los hijos se hace igual a la del menor 'y', de
+	este modo todos los hijos de un padre quedan a la misma altura
+	(sugerencia de Mikel).
+
+2002-03-04  Antonio-M. Corbi Bellot  <acorbi@hal9000.dlsi.ua.es>
+
+	* configure.ac: Cambiado el pixmap del boton de insertar frase,
+	v0.2.10.
+
+2002-03-03  Antonio-M. Corbi Bellot  <acorbi@hal9000.dlsi.ua.es>
+
+	* src/tagger/tagger.cc (right_button_clicked): Vuelto a mejorar el
+	comportamiento tras un click del boton derecho, parece ahora que
+	ya es mas natural.
+
+2002-03-02  Antonio-M. Corbi Bellot  <acorbi@hal9000.dlsi.ua.es>
+
+	* configure.ac: v0.2.9 para reflejar lo anterior.
+
+	* src/tagger/tagger.cc (left_button_clicked): Si el usuario pulsa
+	CONTROL antes de hacer el click es que quiere mover todos los
+	items.
+	(right_button_clicked): Mejorado (creo) el comportamiento al
+	pulsar el botón derecho del ratón sobre un item, ahora, si hay
+	seleccionados, se deseleccionan y se selecciona solo éste.
+
+	* src/tagger/sentence.h (Object): He hecho que la clase sentence
+	derive de Object por completitud.
+
+2002-02-28  Antonio-M. Corbi Bellot  <acorbi@hal9000.dlsi.ua.es>
+
+	* src/tagger/tagger.cc (right_button_clicked): Cuando se pincha el
+	botón dcho. sobre un item y no hay ninguno seleccionado, se
+	selecciona automaticamente este y se despliega el menu pop-up para
+	el.
+
+2002-02-28  Antonio-M. Corbi Bellot  <acorbi@hal9000>
+
+	* configure.ac: v0.2.8 version de demo para Mikel.
+
+	* src/tagger/tagger.cc (group_option): Se calcula
+	semi-automaticamente las coordenadas del nodo 'padre' agrupador de
+	una serie de nodos hijos.
+	(left_button_clicked): Empezado a preparar para q al pulsar la
+	tecla 'CONTROL' se pueda mover todo el arbol, asi se pueden hacer
+	visibles nodos que al crearse han ido a parar fuera del area de
+	dibujo.
+
+2002-02-27  Antonio-M. Corbi Bellot  <acorbi@hal9000>
+
+	* src/tagger/canvas_item.cc (get_item_at): Corregido el fallo que
+	hacia que no encontrara el item en un punto en determinadas
+	ocasiones.
+
+2002-02-25  Antonio-M. Corbi Bellot  <acorbi@hal9000.dlsi.ua.es>
+
+	* configure.ac: v0.2.7 recoge lo anterior. Para saltar a la
+	version 030 quiero que las opciones de 'agrupacion' se lean desde
+	un fichero.
+
+	* src/tagger/tagger.cc (group_option): La etiqueta del nodo
+	agrupador recien creado se lee del menu.
+
+2002-02-24  Antonio-M. Corbi Bellot  <acorbi@hal9000.dlsi.ua.es>
+
+	* src/tagger/tagger.cc (ungroup_option): Corregido el fallo q solo
+	permitia 'desagrupar' nodos con más de un hijo.
+
+2002-02-20  Antonio-M. Corbi Bellot  <acorbi@hal9000>
+
+	* configure.ac: v0.2.5, hechos cambios para completar la creacion
+	de nuevos nodos agrupando otros ya exsitentes. Voy a realizar
+	cambios que afectan a los campos vista/modelo y por eso etiqueto
+	esta version y la guardo.
+	v0.2.6, hecho lo anterior, sigo por este camino.
+
+2002-02-16  Antonio-M. Corbi Bellot  <acorbi@hal9000.dlsi.ua.es>
+
+	* configure.ac: v0.2.4 para reflejar lo anterior.
+
+	* src/tagger/canvas_item.cc (Canvas_item): Añadido el parametro
+	que representa al padre de un item.
+
+	Conjunto de cambios masivos que afectan a items, frases y tagger,
+	p.e., al mover por el canvas un item padre de otros items, estos
+	tambien se mueven.
+
+2002-02-14  Antonio-M. Corbi Bellot  <acorbi@hal9000>
+
+	* src/tagger/tagger.cc (group_option): Ya consigue agrupar, pero
+	falta hacer alguna cosas importantes.
+
+	* src/tagger/text_item.cc (to_xml): Se ejecuta de forma recursiva
+	sobre los hijos del item actual.
+
+	* src/tagger/canvas_item.h (Object): Los canvas_item pueden estar
+	ocultos, es decir, no se deben pintar en el canvas. Por defecto
+	son visibles.
+
+	* src/tagger/tagger.cc (quick_message): Admite un nuevo parametro
+	'title' que es el titulo de la ventana creada. Esta ahora no puede
+	ser cambiada de tamaño.
+
+2002-02-13  Antonio-M. Corbi Bellot  <acorbi@hal9000>
+
+	* src/tagger/canvas_item.h (Object): Comenzado a adaptarse a que
+	la frase tenga un item raiz de un arbol de items.
+
+	* configure.ac: Ultima version en la que una frase dispone de una
+	lista de items, a partir de ahora la frase tendra un item raiz,
+	del cual se desplegará el árbol de items.
+
+2002-02-11  Antonio-M. Corbi Bellot  <acorbi@hal9000.dlsi.ua.es>
+
+	* src/tagger/canvas_item.h (Object): Añadida la lista de items
+	hijos de uno dado.
+
+	* src/tagger/sentence.h (class Sentence): Añadido el mapeador de
+	enteros a Canvas_item.
+
+	* src/tagger/canvas_item.cc (to_xml): Guarda el indice del item en
+	la conversion a xml.
+
+2002-02-10  Antonio-M. Corbi Bellot  <acorbi@hal9000.dlsi.ua.es>
+
+	* configure.ac: v0.2.1 soporta el contador de indices para items
+	del canvas. La cuenta de items se realiza por frases
+	individualmente.
+
+	* src/tagger/sentence.h (class Sentence): Lleva un contador de
+	items creados, ademas de indicar a cada item cuál es su indice
+	asociado.
+
+	* src/tagger/canvas_item.h (Object): Añadido el indice a cada
+	canvas item. Este indice lo proporcionan las frases al crear los
+	items.
+
+2002-02-07  Antonio-M. Corbi Bellot  <acorbi@hal9000>
+
+	* src/tagger/tagger.cc (cm_enable_sentence_items): Habilita los
+	items del popup del canvas relacionados con las frases.
+
+2002-02-06  Antonio-M. Corbi Bellot  <acorbi@hal9000>
+
+	* src/tagger/tagger.cc (quick_message): El botón de aceptar el
+	diálogo es el widget con el foco.
+
+2002-02-05  Antonio-M. Corbi Bellot  <acorbi@hal9000>
+
+	* src/tagger/tagger.cc (da_button_press_event): He seguido
+	portando cosas de la versión de gtkmm.
+
+	* Makefile.am (EXTRA_DIST): Añadido el fichero de glade, no lo
+	guardaba en la distribucion.
+
+2002-02-03  Antonio-M. Corbi Bellot  <acorbi@hal9000.dlsi.ua.es>
+
+	* src/tagger/canvas_item.h (Object): Portadas las clases
+	Canvas_item, Text_item y Sentence.
+
+	* src/tagger/tagger.cc (quick_message_sb): Añadido parametro que
+	constrola el tiempo que se muestra el mensaje en la barra de
+	estado.
+
+2002-02-02  Antonio-M. Corbi Bellot  <acorbi@hal9000.dlsi.ua.es>
+
+	* src/tagger/tagger.cc (quick_message_sb): Muestra un mensaje en
+	la barra de estado que se auto-elimina.
+	(insert_button_pixmapped): Añade un pixmap al boton de insertar
+	una frase en la lista de frases actual.
+	(insert_clicked): Actualiza el tooltip del combobox para que diga
+	cuantas frases tiene insertadas.
+
+2002-02-01  Antonio-M. Corbi Bellot  <acorbi@hal9000.dlsi.ua.es>
+
+	* src/gui/window.h: Afinado un poco mas el comportamiento de las
+	ventanas ante pulsaciones del boton 'close' del windowmanager.
+
+2002-01-31  Antonio-M. Corbi Bellot  <acorbi@hal9000>
+
+	* src/tagger/tagger.h (Window): A partir de la version 0.1.0 dejo
+	de usar gtkmm por diversos motivos (codigo generado por glademm,
+	implementacion no completa de GDK, problemas para compilar con
+	g++-3).
+	
+
