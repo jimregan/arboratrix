@@ -1,0 +1,17 @@
+#! /bin/sh
+
+set -x
+
+if ! test -d config
+then
+  echo Creo el directorio 'config'
+  mkdir config
+fi
+
+##mkdir -p config
+aclocal -I config #--output=config/aclocal.m4
+libtoolize --automake --force --copy
+##cat /usr/share/aclocal/libtool.m4 >>config/aclocal.m4
+autoheader -I config
+automake --foreign --add-missing #-i
+autoconf --include=config
