@@ -1,0 +1,10 @@
+To install arboratrix, do:
+
+bootstrap
+configure
+make
+
+and, if you need,
+
+make install
+
