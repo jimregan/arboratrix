@@ -374,7 +374,7 @@ Tagger_view::open_option(GtkMenuItem *menuitem, gpointer user_data)
   Tagger_view*           t = reinterpret_cast<Tagger_view*>(user_data);
   Tagger_model*          m = t->get_model();
   acb_gui::Yes_no_dialog d(_("Please answer:"), 
-			   _("Opening a new document will erase the actual.\nContinue?"));
+			   _("Opening a new document will erase the current one.\nContinue?"));
 
   t->select_file_name(_("Select a file to Open:"));
   if (t->file_selected.length() > 0)
@@ -431,7 +431,7 @@ Tagger_view::close_option (GtkMenuItem *menuitem, gpointer user_data)
 {
   Tagger_view*  t = reinterpret_cast<Tagger_view*>(user_data);
   acb_gui::Yes_no_dialog d(_("Please answer:"), 
-			   _("If you close the actual document you'll lose"
+			   _("If you close the current document you'll lose"
 			     " unsaved changes.\nContinue?"));
 
   d.set_transient_for(t);
@@ -1363,7 +1363,7 @@ Tagger_view::create_gui(void)
                     (GtkAttachOptions) (GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
   gtk_container_set_border_width (GTK_CONTAINER (sentence_delete_button), 2);
-  gtk_tooltips_set_tip (tooltips, sentence_delete_button, _("Deletes the actual sentence from the list."), NULL);
+  gtk_tooltips_set_tip (tooltips, sentence_delete_button, _("Deletes the current sentence from the list."), NULL);
 
   sentence = gtk_entry_new ();
   gtk_widget_show (sentence);
@@ -1386,7 +1386,7 @@ Tagger_view::create_gui(void)
                     (GtkAttachOptions) (0),
                     (GtkAttachOptions) (0), 0, 0);
   gtk_container_set_border_width (GTK_CONTAINER (finish_button), 2);
-  gtk_tooltips_set_tip (tooltips, finish_button, _("Marks as finished the actual sentence."), NULL);
+  gtk_tooltips_set_tip (tooltips, finish_button, _("Marks the current sentence as finished."), NULL);
 
   label7 = gtk_label_new (_("<b>Possible actions</b>"));
   gtk_widget_show (label7);
@@ -1447,7 +1447,7 @@ Tagger_view::create_gui(void)
                     (GtkAttachOptions) (GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
   gtk_container_set_border_width (GTK_CONTAINER (tag_delete_button), 2);
-  gtk_tooltips_set_tip (tooltips, tag_delete_button, _("Deletes the actual tag."), NULL);
+  gtk_tooltips_set_tip (tooltips, tag_delete_button, _("Deletes the current tag."), NULL);
 
   label8 = gtk_label_new (_("<b>Possible actions</b>"));
   gtk_widget_show (label8);
