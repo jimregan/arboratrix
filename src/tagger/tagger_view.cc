@@ -252,7 +252,7 @@ Tagger_view::create_canvas_menu (void)
   empty = gtk_menu_item_new_with_mnemonic (_("Add empty category"));
   gtk_widget_show (empty);
   gtk_container_add (GTK_CONTAINER (canvas_menu), empty);
-  gtk_tooltips_set_tip (tooltips, empty, _("Add's a child empty category node."), NULL);
+  gtk_tooltips_set_tip (tooltips, empty, _("Adds an empty category node as a child."), NULL);
 
   add_index = gtk_menu_item_new_with_mnemonic (_("Add index"));
   gtk_widget_show (add_index);
