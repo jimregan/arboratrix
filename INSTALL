@@ -8,3 +8,4 @@ and, if you need,
 
 make install
 
+Note: LaTeX requires the package 'foiltex' to be installed, otherwise the 'configure' script will fail.
