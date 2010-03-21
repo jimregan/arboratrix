@@ -6,6 +6,7 @@
 PACKAGE = @PACKAGE@
 VERSION = @VERSION@
 AMTAR = tar
+ACLOCAL_AMFLAGS = -I config
 
 .PHONY : doc
 

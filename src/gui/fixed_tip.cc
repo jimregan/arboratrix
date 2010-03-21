@@ -67,7 +67,7 @@ Fixed_tip::create_gui()
 
       g_signal_connect (G_OBJECT (the_widget), 
 			"expose_event",
-			GTK_SIGNAL_FUNC (expose_handler),
+			G_CALLBACK (expose_handler),
 			static_cast<gpointer>(this));
 
       label = gtk_label_new (NULL);
@@ -79,7 +79,7 @@ Fixed_tip::create_gui()
 
       g_signal_connect (G_OBJECT (the_widget),
 			"destroy",
-			GTK_SIGNAL_FUNC (gtk_widget_destroyed),
+			G_CALLBACK (gtk_widget_destroyed),
 			&the_widget);
     }
 
@@ -112,7 +112,7 @@ Fixed_tip::show(int x, int y, const std::string& t, int tout)
 
 
 bool 
-Fixed_tip::expose_handler (GtkTooltips *tooltip, GdkEvent *event, 
+Fixed_tip::expose_handler (GtkTooltip *tooltip, GdkEvent *event, 
 			   gpointer data)
 {
   GtkWidget* w = static_cast<Fixed_tip*>(data)->the_widget;

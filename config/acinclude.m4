@@ -8,7 +8,7 @@
 #
 # Comprueba si LaTeX es bueno o no...
 #
-AC_DEFUN(acb_LATEX_IS_GOOD,
+AC_DEFUN([acb_LATEX_IS_GOOD],
 [
 AC_MSG_CHECKING(Si LaTeX es lo bastante bueno)
 changequote(`, ')
@@ -54,7 +54,7 @@ rm -f conftest.tex conftest.log conftest.aux texput.log
 # Comprobamos las nuevas conversiones de tipo de C++
 #
 
-AC_DEFUN(acb_CXX_NEW_CASTS,
+AC_DEFUN([acb_CXX_NEW_CASTS],
 [
 AC_MSG_CHECKING(Si el compilador de C++ tiene las nuevas conversiones de tipo)
 AC_LANG_PUSH(C++)
@@ -68,7 +68,7 @@ AC_LANG_POP(C++)
 # Comprobamos el soporte de STL
 #
 
-AC_DEFUN(acb_CXX_STL,
+AC_DEFUN([acb_CXX_STL],
 [
 AC_MSG_CHECKING(Si el compilador de C++ soporta STL)
 AC_LANG_PUSH(C++)
