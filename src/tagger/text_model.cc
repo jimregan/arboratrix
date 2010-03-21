@@ -32,7 +32,7 @@ l:      acorbi@hal9000
 
 using namespace acb_mvc;
 
-//const std::string Text_model::empty_set  = g_locale_to_utf8 ("ø", 1, NULL, NULL, NULL);
+//const std::string Text_model::empty_set  = g_locale_to_utf8 ("ï¿½", 1, NULL, NULL, NULL);
 std::string Text_model::empty_set; // vacia inicialmente
 
 const std::string&
@@ -50,8 +50,8 @@ Text_model::Text_model(const std::string& nt, Text_model* pparent)
   if (empty_set == "")
     {
       gsize w, h;
-      // Representacion UTF8 de 'ø'.
-      empty_set = g_locale_to_utf8 ("ø", 1, &w, &h, NULL);
+      // Representacion UTF8 de 'ï¿½'.
+      empty_set = g_locale_to_utf8 ("Ã¸", 2, &w, &h, NULL);
     }
 
   the_sentence      = NULL;
@@ -137,7 +137,7 @@ Text_model::add_child(Text_model* child)
 	{
 	  //Lo quito de su padre?
 	  child->remove_from_parent();
-	  //Lo añado al nuevo
+	  //Lo aï¿½ado al nuevo
 	  children.push_back(child);
 	  child->set_parent(this);
 	}
