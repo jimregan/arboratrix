@@ -12,7 +12,6 @@ XML2_LIBS = @XML2_LIBS@
 #LIBTOOL = @LIBTOOL@ --tag CXX
 
 ## Usarla más adelante...: -DGTK_DISABLE_DEPRECATED
-CXXFLAGS =
 AM_CXXFLAGS = -g -foperator-names -Wall -pipe
 #INCLUDES = -I$(top_srcdir)/src/gui @GTK_CFLAGS@ $(XML2_CFLAGS)
 AM_CPPFLAGS = -I$(top_srcdir)/src @GTK_CFLAGS@ $(XML2_CFLAGS)

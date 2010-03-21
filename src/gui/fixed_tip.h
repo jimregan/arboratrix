@@ -46,7 +46,7 @@ namespace acb_gui
     virtual GtkWidget* create_gui();
   
     //! Pinta el tool-tip.
-    static bool expose_handler(GtkTooltips *tooltips, GdkEvent *event,
+    static bool expose_handler(GtkTooltip *tooltips, GdkEvent *event,
 			       gpointer data);
     //! Auto-elimina el tool-tip.
     static gint tip_remover(gpointer data);

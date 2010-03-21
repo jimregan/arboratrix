@@ -5,6 +5,7 @@ AC_PREREQ(2.57)
 AC_INIT(arboratrix, 2.0.0-pre20, acorbi@dlsi.ua.es)
 
 AC_CONFIG_AUX_DIR(config)
+AC_CONFIG_MACRO_DIR([config])
 AC_CONFIG_SRCDIR([src/gui/widget.h])
 AC_CONFIG_HEADER(sishitra_config.h)
 #AC_CONFIG_HEADERS(sishitra_config.h)
@@ -26,7 +27,7 @@ AC_PROG_CPP
 AC_PROG_INSTALL
 AC_PROG_LN_S
 AC_PROG_MAKE_SET
-AC_PROG_RANLIB
+LT_INIT
 
 AC_ISC_POSIX
 dnl AC_ARG_ENABLE(g3, [  --enable-g3             Usa el nuevo compilador.])

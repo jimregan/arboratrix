@@ -396,18 +396,28 @@ Canvas::left_button_press(GdkEventButton *event)
       else if (shift)
 	{
 	  action = kNothing;
-	  if (cis)
-	    if (not cis->is_selected())
-	      action = kAppend;
-	    else
-	      action = kRemoveThis;
+	  if (cis) 
+            {
+	      if (not cis->is_selected()) 
+                {
+	          action = kAppend;
+	        } 
+              else 
+                {
+	          action = kRemoveThis;
+                }
+            }
 	}
       else
 	{
 	  if (cis)
-	    action = kOnlyThis;
+            {
+	      action = kOnlyThis;
+            }
 	  else
-	    action = kClearList;
+            {
+	      action = kClearList;
+            }
 	}
     }
 }
@@ -688,24 +698,32 @@ void
 Canvas::add_item(Canvas_item* child)
 {
   if (child != NULL)
-    if (cil != NULL)
-      cil->push_back(child);
-    else
-      {
-	//std::cerr << "Canvas::add_item: no existe la lista de items.\n";
-      }
+    {
+      if (cil != NULL)
+        {
+          cil->push_back(child);
+        }
+      else
+        {
+  	//std::cerr << "Canvas::add_item: no existe la lista de items.\n";
+        }
+    }
 }
 
 void
 Canvas::remove_item(Canvas_item* child)
 {
   if (child != NULL)
-    if (cil != NULL)
-      cil->remove(child);
-    else
-      {
-	//std::cerr << "Canvas::remove_item: no existe la lista de items.\n";
-      }
+    {
+      if (cil != NULL)
+        {
+          cil->remove(child);
+        }
+      else
+        {
+  	//std::cerr << "Canvas::remove_item: no existe la lista de items.\n";
+        }
+    }
 }
 
 void

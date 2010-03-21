@@ -10,7 +10,6 @@ OBJEXT = @OBJEXT@
 
 EXTRA_DIST = old_fixedtip.cc old_fixedtip.h
 
-CXXFLAGS =
 AM_CXXFLAGS = -foperator-names \
               -Wall -g @GTK_CFLAGS@ \
 	      -DG_DISABLE_DEPRECATED \

@@ -89,12 +89,12 @@ Dialog::catch_enter_esc_keys(const std::string& wn)
 
   if (w)
     g_signal_connect (GTK_OBJECT (w), "key_press_event",
-		      GTK_SIGNAL_FUNC (key_pressed), this);
+		      G_CALLBACK (key_pressed), this);
 }
 
 void
 Dialog::catch_esc_key()
 {
   g_signal_connect (GTK_OBJECT (the_widget), "key_press_event",
-		    GTK_SIGNAL_FUNC (esc_key_pressed), this);
+		    G_CALLBACK (esc_key_pressed), this);
 }

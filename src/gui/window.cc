@@ -109,15 +109,15 @@ Window::set_wm_close(Close_action a)
     {
     case DESTROY:
       sh = g_signal_connect (G_OBJECT (the_widget), "delete_event",
-			     GTK_SIGNAL_FUNC (wm_do_close), this);
+			     G_CALLBACK (wm_do_close), this);
       break;
     case HIDE:
       sh = g_signal_connect (G_OBJECT (the_widget), "delete_event",
-			     GTK_SIGNAL_FUNC (wm_do_hide), this);
+			     G_CALLBACK (wm_do_hide), this);
       break;
     case IGNORE:
       sh = g_signal_connect (G_OBJECT (the_widget), "delete_event",
-			     GTK_SIGNAL_FUNC (wm_no_close), this);
+			     G_CALLBACK (wm_no_close), this);
       break;
     default:
       break;

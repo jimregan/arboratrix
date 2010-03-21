@@ -8,7 +8,6 @@ age=0
 DEPDIR = @DEPDIR@
 OBJEXT = @OBJEXT@
 
-CXXFLAGS =
 AM_CXXFLAGS = -foperator-names -Wall -g -pipe
 
 ##LDFLAGS = @GTK_LIBS@
