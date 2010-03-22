@@ -49,9 +49,10 @@ Text_model::Text_model(const std::string& nt, Text_model* pparent)
   //EMPTY_SET
   if (empty_set == "")
     {
-      gsize w, h;
+      //gsize w, h;
       // Representacion UTF8 de '�'.
-      empty_set = g_locale_to_utf8 ("ø", 2, &w, &h, NULL);
+      //empty_set = g_locale_to_utf8 ("ø", 2, &w, &h, NULL);
+      empty_set = "ø";
     }
 
   the_sentence      = NULL;
