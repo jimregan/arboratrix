@@ -1,5 +1,7 @@
 A la hora de optimizar probar con las opciones propias de la
 arquitectura:
- · -march=pentium[34]
- · -mfpmath=sse/sse,387/3dnow/sse2
- · -msse2
+ * -march=pentium[34]
+ * -mfpmath=sse/sse,387/3dnow/sse2
+ * -msse2
+
+Note: LaTeX requires the package 'foiltex' to be installed, otherwise the 'configure' script will fail.
