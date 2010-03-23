@@ -3,12 +3,12 @@ Arboratrix (c) 2001, 2002, 2003 A. Corbi.
 
 (5):- 19/06/03: Cambios respecto a arboratrix1:
 
-	- Uso de la librería Gtk v2.x, proporciona fuentes alisados y
+	- Uso de la librerÃ­a Gtk v2.x, proporciona fuentes alisados y
 	un mejor 'aspecto' de las aplicaciones.
 
 	- Interfaz mas intuitivo (ahora son visibles tanto frases como etiquetas).
 
-	- Las etiquetas se añaden con un interfaz `drag and drop' a la frase.
+	- Las etiquetas se aÃ±aden con un interfaz `drag and drop' a la frase.
 
 	- Las frases se siguen pudiendo importar desde un fichero
 	ASCII (una frase por linea).
@@ -19,7 +19,7 @@ Arboratrix (c) 2001, 2002, 2003 A. Corbi.
 	- Incorpora la base para q los nodos muestren 'propiedades' en
 	un tooltip al hacer Control-click sobre ellos (ARMANDO, MAXI).
 
-	- Los 'nodos' etiqueta se pueden crear como triángulos
+	- Los 'nodos' etiqueta se pueden crear como triÃ¡ngulos
 	inicialmente y posteriormente se pueden 'reconvertir' en nodos
 	'normales'.
 
@@ -27,8 +27,8 @@ Arboratrix (c) 2001, 2002, 2003 A. Corbi.
 	visualmente por el color al seleccionarlos.
 
 	- Para cambiar el padre a un nodo ya _no_ es necesario primero
-	quitarle su padre (unparent) actual y colgárselo al nuevo, basta
-	simplemente con arrastrar sobre el nuevo y soltar el botón del ratón.
+	quitarle su padre (unparent) actual y colgÃ¡rselo al nuevo, basta
+	simplemente con arrastrar sobre el nuevo y soltar el botÃ³n del ratÃ³n.
 
 	- Sigue pudiendo exportar a formato qtree el documento actual,
 	pero _no_ puede exportar a formato PS/PDF tal y como hacia
@@ -37,29 +37,29 @@ Arboratrix (c) 2001, 2002, 2003 A. Corbi.
 	- Internamente:
 		1) Ha cambiado el formato de los ficheros xml.
 		2) Han cambiado todas las estructuras de datos usadas,
-		arboratrix2 comparte muy poco de código con
-		arboratrix1, prácticamente es una reescritura desde
+		arboratrix2 comparte muy poco de cÃ³digo con
+		arboratrix1, prÃ¡cticamente es una reescritura desde
 		cero. Arboratrix2 hace uso de la arquitectura MVC.
-		3) Ha cambiado la estructuración del código, arboratrix2 consta de:
-			a) Una librería para la parte de interfaz (libacb_gui)
-			b) Una librería para la parte de MVC (libacb_mvc)
-			c) Una aplicación principal (arboratrix).
+		3) Ha cambiado la estructuraciÃ³n del cÃ³digo, arboratrix2 consta de:
+			a) Una librerÃ­a para la parte de interfaz (libacb_gui)
+			b) Una librerÃ­a para la parte de MVC (libacb_mvc)
+			c) Una aplicaciÃ³n principal (arboratrix).
 
 
 	(*) POR HACER:
 
-	- Limpiar el código de mensajes en la consola.
+	- Limpiar el cÃ³digo de mensajes en la consola.
 	- Comprobar posibles perdidas de memoria.
 
 (4):- Corregir:
-	- Se debe poder añadir varios hijos 'de-golpe' a un padre.
+	- Se debe poder aÃ±adir varios hijos 'de-golpe' a un padre.
 	(He estudiado esto y creo q puede ser un foco de problemas, he
-	probado una solución y no me convence, de momento no lo implemento
-	así­.)
+	probado una soluciÃ³n y no me convence, de momento no lo implemento
+	asÃ­Â­.)
 	- Por motivos similares solo dejo borrar items de uno en uno.
 
 (3):- 15/05/03
-Sigo avanzando en la consecución de arboratrix2.
+Sigo avanzando en la consecuciÃ³n de arboratrix2.
 
 	Por hacer aun:
 	==============
@@ -68,20 +68,20 @@ Sigo avanzando en la consecución de arboratrix2.
 	- Lectura ficheros ASCII de frases        : Hecho el 14/06/03
 	- Desparentizado/Borrado de nodos         : Hecho el 03/06/03
 	- Adjunto / Des adjunto                   : Hecho el 05/06/03
-	- Triángulos                              : Hecho el 10/06/03
-	- Exportación QTree/PS/PDF                : Hecho el 
+	- TriÃ¡ngulos                              : Hecho el 10/06/03
+	- ExportaciÃ³n QTree/PS/PDF                : Hecho el 
 	- Implementar guardar como                : Hecho el 14/06/03
 
 (2):- 23/12/02
 Comenzado a migrar al uso de MVC.
-Genera automáticamente las meta-cabeceras de las librerías MVC y GUI.
+Genera automÃ¡ticamente las meta-cabeceras de las librerÃ­as MVC y GUI.
 
 (1):- 24/11/02
-Etiquetador sintáctico. 4
+Etiquetador sintÃ¡ctico. 4
 Hace uso de Gtk 2.x.y
-He comenzado la migración a gtk2.
+He comenzado la migraciÃ³n a gtk2.
 
 (0):-
-Etiquetador sintáctico.
+Etiquetador sintÃ¡ctico.
 Hace uso de Gtk 1.2.x
 Basado en idea original de Mikel Forcada.
