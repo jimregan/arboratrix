@@ -1,5 +1,6 @@
 Arboratrix (c) 2001, 2002, 2003 A. Corbi.
 =========================================
+
 (5):- 19/06/03: Cambios respecto a arboratrix1:
 
 	- Uso de la librería Gtk v2.x, proporciona fuentes alisados y
